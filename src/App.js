@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import Main from './components/Main';
-import { createGame } from './game';
+import Game from './game/Game';
+import config from './config';
 import './assets/App.css';
 
-const game = createGame();
+const { width, height } = config;
+const game = new Game(width, height);
+window.game = game;
 
 class App extends Component {
   render() {

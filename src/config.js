@@ -1,6 +1,6 @@
 export const config = {
-  width: 3,
-  height: 2,
+  width: 5,
+  height: 3,
   alphabet: [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' ],
   rotateType: {
     1: ['1010', '0101'],

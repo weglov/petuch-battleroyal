@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { rotateBlock } from '../game/game';
 
 import Block from './Block';
 import Node from './Node';
@@ -17,7 +16,7 @@ class Main extends Component {
   }
   
   rotate = (block, position) => {
-    const update = rotateBlock(this.state, block, position);
+    const update = this.props.game.rotate(block, position);
     this.setState({ paths: update.paths });
   }
 

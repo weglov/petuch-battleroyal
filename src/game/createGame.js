@@ -1,6 +1,4 @@
 import { random, sample, times } from 'lodash';
-import { initMatrixAdjacency, rotateBlock } from './game';
-import { printAllPaths } from './dfs';
 import config from '../config';
 
 
@@ -26,7 +24,7 @@ export function createGame(width, height) {
   
     for (let x = 0; x < width; x++) {
       name = ++name;
-      const type = random(3, 3);
+      const type = random(1, 3);
       const position = sample(rotateType[type]);
       const xy = {x, y: y + 1};
 
@@ -36,7 +34,6 @@ export function createGame(width, height) {
         xy, 
         position,
         type,
-        rotateBlock,
       }
     }
   }
@@ -44,9 +41,7 @@ export function createGame(width, height) {
   sets.unshift(times(width, (v) => parentBlock(v, 0, `x${v}`)));
   sets.push(times(width, (v) => parentBlock(v, height + 1, `y${v}`, 'pig')));
 
-  const matrix = initMatrixAdjacency(width * (height + 2), sets);
-
-  return { sets: sets, matrix, paths: [] };
+  return sets;
 };
 
 export default createGame;

@@ -1,74 +1,25 @@
-import { times, constant, flatten, forEach, toNumber, findIndex } from 'lodash';
+import { createGame } from './createGame';
+import { initMatrixAdjacency, rotateBlock } from './helpers';
 import { printAllPaths } from './dfs';
-import config from '../config';
 
+class Game {
+  constructor(width, height) {
+    const game = createGame(width, height);
+    const vertex = width * (height + 2);
 
-const { width, connections } = config;
+    this.width = width;
+    this.height = height;
+    this.sets = game;
+    this.matrix = initMatrixAdjacency(vertex, this.sets);
+  }
 
-const checkConnections = (v, child, type) => {
-  const sync = v.position.charAt(connections[type][0]) === '1' && child.position.charAt(connections[type][1]) === '1';
+  get paths() {
+    return printAllPaths(this.width, this.matrix);
+  }
 
-  return toNumber(sync);
-};
-
-const getNeighbors = (k) => {
-  const left = k % width === 0 ? -1 : k - 1;
-  const right = (k + 1) % width === 0 ? -1 : k + 1;
-  const top = k - width;
-  const bottom = k + width;
-
-  return { left, top, right, bottom };
+  rotate(block, position) {
+    return rotateBlock(this, block, position);
+  }
 }
 
-const convertEdge = (matrix) => {
-  const res = matrix.reduce((path, v, k) => {
-    path[k] = v.reduce((r, val, key) => {
-      if (val === 1) r.push(key);
-
-      return r;
-    }, []);
-
-    return path;
-  }, {});
-
-  return res;
-}
-
-export const rotateBlock = (game, block, position) => {
-  const { xy, name } = block;
-  game.sets[xy.y][xy.x].position = position;
-
-  const flattenGame = flatten(game.sets);
-  const k = findIndex(flattenGame, { name });
-
-  forEach(getNeighbors(k), (value, type) => {
-    if (value !== -1) {
-      game.matrix[k][value] = checkConnections(flattenGame[k], flattenGame[value], type);
-      game.matrix[value][k] = checkConnections(flattenGame[k], flattenGame[value], type);
-    }
-  });
-
-  const g = convertEdge(game.matrix);
-  game.paths = printAllPaths(g);
-  console.log(game.paths);
-
-  return game;
-};
-
-export const initMatrixAdjacency = (v, matrix) => {
-  let result = [];
-  times(v, () => result.push(times(v, constant(0))));
-  const array = flatten(matrix);
-
-  array.forEach((v, k) => {
-    forEach(getNeighbors(k), (value, type) => {
-      if (value >= 0 && value < array.length) {
-        result[k][value] = checkConnections(v, array[value], type);
-      }
-    });
-  });
-
-  return result;
-}
-
-export default initMatrixAdjacency;
+export default Game;
