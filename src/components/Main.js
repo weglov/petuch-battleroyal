@@ -48,7 +48,7 @@ class Main extends Component {
   render() {
     return (
       <div className="game">
-        <h1> Найденно связей: {this.state.paths.length} </h1>
+        <h1> Найдено связей: {this.state.paths.length} </h1>
         <table className="game-intro">
           <tbody>
             { this.matrix() }
