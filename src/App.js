@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Main from './components/Main';
-import Game from './game/Game';
+import Game from './game/Graph';
 import config from './config';
 import './assets/App.css';
 

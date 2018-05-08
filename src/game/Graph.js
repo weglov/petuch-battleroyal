@@ -2,7 +2,7 @@ import { createGame } from './createGame';
 import { initMatrixAdjacency, rotateBlock } from './helpers';
 import { printAllPaths } from './dfs';
 
-class Game {
+class Graph {
   constructor(width, height) {
     const game = createGame(width, height);
     const vertex = width * (height + 2);
@@ -22,4 +22,4 @@ class Game {
   }
 }
 
-export default Game;
+export default Graph;
