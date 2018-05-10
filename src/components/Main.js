@@ -35,10 +35,8 @@ class Main extends Component {
             return <Block 
               rotate={this.rotate}
               key={v.name}
-              xy={v.xy}
-              type={v.type}
-              name={v.name}
-              position={v.position}/>
+              block={v}
+            />
           }
         })
       }</Row>
