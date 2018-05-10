@@ -14,11 +14,6 @@ function parentBlock(x, y, name, type = 'chiken') {
   }
 };
 
-const crossSpawn = (w, h) => {
-  const ratio = round(w * h * crossRatio);
-  return times(ratio, () => [random(h - 1), random(w - 1)])
-};
-
 export function createGame(width, height) {
   let sets = [];
   let name = 0;
@@ -42,8 +37,8 @@ export function createGame(width, height) {
     }
   }
 
-  crossSpawn(width, height).forEach((v) => {
-    const block = sets[v[0]][v[1]];
+  times(round(width * height * crossRatio), () => {
+    const block = sample(sample(sets));
     block.type = 3;
     block.position = rotateType[3][0];
   });
