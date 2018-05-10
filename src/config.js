@@ -1,6 +1,7 @@
 export const config = {
   width: 5,
   height: 3,
+  crossRatio: .2,
   alphabet: [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' ],
   rotateType: {
     1: ['1010', '0101'],

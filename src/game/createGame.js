@@ -1,8 +1,8 @@
-import { random, sample, times } from 'lodash';
+import { random, sample, times, round } from 'lodash';
 import config from '../config';
 
 
-const { rotateType } = config;
+const { rotateType, crossRatio } = config;
 
 function parentBlock(x, y, name, type = 'chiken') {
   return {
@@ -14,6 +14,10 @@ function parentBlock(x, y, name, type = 'chiken') {
   }
 };
 
+const crossSpawn = (w, h) => {
+  const ratio = round(w * h * crossRatio);
+  return times(ratio, () => [random(h - 1), random(w - 1)])
+};
 
 export function createGame(width, height) {
   let sets = [];
@@ -24,7 +28,7 @@ export function createGame(width, height) {
   
     for (let x = 0; x < width; x++) {
       name = ++name;
-      const type = random(1, 3);
+      const type = random(1, 2);
       const position = sample(rotateType[type]);
       const xy = {x, y: y + 1};
 
@@ -37,6 +41,12 @@ export function createGame(width, height) {
       }
     }
   }
+
+  crossSpawn(width, height).forEach((v) => {
+    const block = sets[v[0]][v[1]];
+    block.type = 3;
+    block.position = rotateType[3][0];
+  });
 
   sets.unshift(times(width, (v) => parentBlock(v, 0, `x${v}`)));
   sets.push(times(width, (v) => parentBlock(v, height + 1, `y${v}`, 'pig')));
