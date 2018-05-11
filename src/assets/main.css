@@ -82,6 +82,8 @@
 .table-block svg g, .table-block svg path {
   stroke-width: 45;
   stroke: #2FE7F1;
+  transition: all .1s;
+  transition-delay: 300ms;
 }
 
 .table-block__active svg path {
