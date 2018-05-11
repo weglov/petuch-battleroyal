@@ -1,20 +1,23 @@
-import { random, sample, times, round } from 'lodash';
+import { random, sample, times, round, shuffle, sampleSize } from 'lodash';
 import config from '../config';
 
 
-const { rotateType, crossRatio } = config;
+const { rotateType, crossRatio, nodes } = config;
 
-function parentBlock(x, y, name, type = 'chiken') {
+function parentBlock(x, y, name, type, parent) {
   return {
     name,
     node: true,
     xy: {x, y},
     position: rotateType[1][1],
     type,
+    parent,
   }
 };
 
 export function createGame(width, height) {
+  const top = sampleSize(shuffle(nodes.top), width);
+  const bottom = sampleSize(shuffle(nodes.bottom), width);
   let sets = [];
   let name = 0;
 
@@ -43,8 +46,8 @@ export function createGame(width, height) {
     block.position = rotateType[3][0];
   });
 
-  sets.unshift(times(width, (v) => parentBlock(v, 0, `x${v}`)));
-  sets.push(times(width, (v) => parentBlock(v, height + 1, `y${v}`, 'pig')));
+  sets.unshift(times(width, (v) => parentBlock(v, 0, `x${v}`, top[v], 'top')));
+  sets.push(times(width, (v) => parentBlock(v, height + 1, `y${v}`, bottom[v], 'bottom')));
 
   return sets;
 };

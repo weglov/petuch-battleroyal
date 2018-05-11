@@ -66,7 +66,7 @@ class Block extends Component {
 
   render() {
     return (
-      <td key={this.state.name} className={ this.active + ' table-block' }>
+      <div key={this.state.name} className={ this.active + ' table-block' }>
         <div
           alt={this.state.name}
           onClick={this.rotateBlock}
@@ -75,7 +75,7 @@ class Block extends Component {
         >
           { svgBlock[`type${this.state.type}`] }
         </div>
-      </td>
+      </div>
     );
   }
 }

@@ -27,9 +27,7 @@ class Main extends Component {
           if (v.node) {
             return <Node
               key={v.name}
-              name={v.name}
-              type={v.type}
-              position={v.position}
+              block={v}
             />
           } else {
             return <Block 
@@ -43,15 +41,19 @@ class Main extends Component {
     });
   }
 
+  nextGame = () => {
+    alert('coming soon')
+    // this.props.next();
+  };
+
   render() {
     return (
-      <div className="game">
-        <h1> Найдено связей: {this.state.paths.length} </h1>
-        <table className="game-intro">
-          <tbody>
-            { this.matrix() }
-          </tbody>
-        </table>
+      <div className="app">
+        <div className="app-header">Найденно связей: { this.state.paths.length }</div>
+        <div className="app-game">
+          <div className="game-table">{ this.matrix() }</div>
+        </div>
+        <div className="app-footer" onClick={ this.nextGame }>Next game</div>
       </div>
     );
   }

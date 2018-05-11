@@ -11,7 +11,7 @@ class Row extends Component {
 
   render() {
     return (
-      <tr className="table-row">{ this.props.children }</tr>
+      <div className="table-row">{ this.props.children }</div>
     );
   }
 }

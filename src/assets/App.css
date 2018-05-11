@@ -1,35 +1,43 @@
-.App {
-  text-align: center;
+#root {
+  background: #39464F;
 }
 
-.game-intro {
-  border: 1px solid #000;
-  margin: 2rem auto;
+.app {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  min-width: 352px;
+  height: 100vh;
+  z-index: 20;
+  position: relative;
+}
+
+.app-header {
+  box-sizing: border-box;
+  font-size: 1.5rem;
+  padding: .5rem;
+  color: #fff;
+}
+
+.app-footer {
+  text-transform: uppercase;
+  color: #fff;
+  padding: 1rem;
+}
+
+.app-game {
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.game-table {
   table-layout: fixed;
   border-spacing: 0;
   -webkit-border-horizontal-spacing: 0;
   -webkit-border-vertical-spacing: 0;
-}
-
-.game-intro td {
-  height: 70px;
-  width: 70px;
-  border: 1px solid #000;
-  position: relative;
-}
-
-.game-intro td svg {
-  width: 100%;
-  height: auto;
-}
-
-.game-intro td.table-block__active .block-type g, .game-intro td.table-block__active .block-type path {
-  stroke: green;
-}
-
-.game-intro td span {
-  font-size: 3rem;
-  vertical-align: middle;
 }
 
 .block-type {
@@ -47,11 +55,71 @@
   bottom: 0;
 }
 
-.game-intro td .block-count {
+.table-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-content: space-between;
+  align-items: center;
+}
+
+.table-block {
+  position: relative;
+  width: calc(90vw/5);
+  height: calc(90vw/5);
+  border: 1px solid #000;
+  border-radius: 5px;
+  overflow: hidden;
+  background: rgba(69, 82, 91, 0.5);
+}
+
+.table-block svg {
+  width: 100%;
+  height: auto;
+}
+
+.table-block svg g, .table-block svg path {
+  stroke-width: 45;
+  stroke: #2FE7F1;
+}
+
+.table-block__active svg path {
+  stroke: #86E941;
+}
+
+.table-block_parent {
+  border: none;
+  text-align: center;
+  font-size: 2.6rem;
+  vertical-align: bottom;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.25) 0%,rgba(0,0,0,0) 60%);;
+}
+
+.table-node--top div, .table-node--bottom div {
+  margin: 10px auto 0;
+}
+
+.table-block_parent.table-block__active {
+  background: radial-gradient(ellipse at center, rgba(134, 233, 65, 0.4) 0%,rgba(0,0,0,0) 60%);
+}
+
+
+.loader {
   position: absolute;
-  font-size: 1rem;
-  right: 0;
-  top: 0;
-  color: red;
-  line-height: normal;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #F35B97;
+  transition: all 1.5s linear;
+  z-index: 22;
+  text-align: center;
+  line-height: 100vh;
+  color: #fff;
+  font-weight: bold;
+  font-size: 5rem;
+}
+
+.loader.loader-active { 
+  height: 0;
 }
