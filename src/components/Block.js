@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { indexOf } from 'lodash';
 import config from '../config';
-import type1 from '../assets/type1.svg';
-import type2 from '../assets/type2.svg';
-import type3 from '../assets/type3.svg';
 
 const svgBlock = {
   type1: <svg width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
@@ -60,11 +57,9 @@ class Block extends Component {
   }
 
   blockStyle(type) {
-    const types = [type1, type2, type3];
     const deg = this.state.rotate;
 
     return {
-      // backgroundImage: `url(${types[type - 1]})`,
       transform: `rotate(${deg}deg)`,
     };
   }
@@ -72,7 +67,6 @@ class Block extends Component {
   render() {
     return (
       <td key={this.state.name} className={ this.active + ' table-block' }>
-        <span className="block-count">{this.props.block.branches}</span>
         <div
           alt={this.state.name}
           onClick={this.rotateBlock}
