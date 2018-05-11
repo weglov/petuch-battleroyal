@@ -3,7 +3,7 @@ import Main from './components/Main';
 import Loader from './components/Loader';
 import Game from './game/Graph';
 import config from './config';
-import './assets/app.css';
+import './assets/main.css';
 
 const { width, height } = config;
 

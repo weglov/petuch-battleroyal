@@ -104,7 +104,6 @@
   background: radial-gradient(ellipse at center, rgba(134, 233, 65, 0.4) 0%,rgba(0,0,0,0) 60%);
 }
 
-
 .loader {
   position: absolute;
   bottom: 0;
@@ -122,4 +121,12 @@
 
 .loader.loader-active { 
   height: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .table-block {
+    position: relative;
+    width: 70px;
+    height: 70px;
+  }
 }
