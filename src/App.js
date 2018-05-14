@@ -10,9 +10,11 @@ const { width, height } = config;
 class App extends Component {
   constructor(props) {
     super(props);
+    const game = new Game(width, height);
+    window.game = game;
 
     this.state = {
-      game: new Game(width, height),
+      game,
     }
   }
 

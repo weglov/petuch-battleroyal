@@ -2,6 +2,14 @@
   background: #39464F;
 }
 
+.main {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
 .app {
   display: flex;
   flex-direction: column;
@@ -10,7 +18,7 @@
   align-content: center;
   align-items: center;
   min-width: 352px;
-  height: 100vh;
+  height: 100%;
   z-index: 20;
   position: relative;
 }
@@ -20,6 +28,19 @@
   font-size: 1.5rem;
   padding: .5rem;
   color: #fff;
+}
+
+.app-header-round {
+  display: block;
+  height: 6.5rem;
+  width: 6.5rem;
+  line-height: 7.5rem;
+  text-align: center;
+  border-radius: 50%;
+  background: #3B94B2;
+  color: #fff;
+  font-size: 2rem;
+  margin-top: -2.5rem;
 }
 
 .app-footer {
@@ -66,11 +87,11 @@
 
 .table-block {
   position: relative;
-  width: calc(90vw/5);
-  height: calc(90vw/5);
-  border: 1px solid #000;
+  width: calc(85vw/4);
+  height: calc(85vw/4);
   border-radius: 5px;
   overflow: hidden;
+  margin: 1px;
   background: rgba(69, 82, 91, 0.5);
 }
 
@@ -112,7 +133,7 @@
   width: 100vw;
   height: 100vh;
   background: #F35B97;
-  transition: all 1.5s linear;
+  transition: all 1s linear;
   z-index: 22;
   text-align: center;
   line-height: 100vh;
@@ -121,8 +142,8 @@
   font-size: 5rem;
 }
 
-.loader.loader-active { 
-  height: 0;
+.loader.loader-active {
+  transform: translateY(100%);
 }
 
 @media only screen and (min-width: 768px) {

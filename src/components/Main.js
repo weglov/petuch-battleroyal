@@ -49,7 +49,9 @@ class Main extends Component {
   render() {
     return (
       <div className="app">
-        <div className="app-header">Найденно связей: { this.state.paths.length }</div>
+        <div className="app-header">
+          <div className="app-header-round">{ this.state.paths.length }</div>
+        </div>
         <div className="app-game">
           <div className="game-table">{ this.matrix() }</div>
         </div>
