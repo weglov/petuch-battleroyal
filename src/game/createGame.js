@@ -1,4 +1,5 @@
-import { random, sample, times, round, shuffle, sampleSize } from 'lodash';
+import { random, sample, times, round, shuffle, sampleSize, indexOf } from 'lodash';
+import { getEmojiLink } from './helpers';
 import config from '../config';
 
 
@@ -12,6 +13,7 @@ function parentBlock(x, y, name, type, parent) {
     position: rotateType[1][1],
     type,
     parent,
+    emojiUrl: getEmojiLink(type),
   }
 };
 
@@ -36,6 +38,7 @@ export function createGame(width, height) {
         xy, 
         position,
         type,
+        rotate: indexOf(rotateType[type], position) * 90,
       }
     }
   }

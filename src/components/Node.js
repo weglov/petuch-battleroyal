@@ -8,32 +8,20 @@ const round = <svg width='150' height='150' viewBox='0 0 150 150' xmlns='http://
 
 
 class Node extends Component {
-  constructor(props) {
-    super(props);
-    const { name, parent, position, type, branches } = this.props.block;
-    this.state = {
-      name,
-      parent,
-      position,
-      type,
-      branches,
-    }
-  }
-
   get active() {
-    return this.props.block.branches ? 'table-block__active' : ''
+    const { branches } = this.props.block;
+
+    return branches ? 'table-block__active' : ''
   }
 
   render() {
+    const { name, parent, emojiUrl } = this.props.block;
+
     return (
-      <div key={this.state.name} className={
-        "table-node--" + this.state.parent + " table-block table-block_parent " + this.active 
+      <div key={name} className={
+        "table-node--" + parent + " table-block table-block_parent " + this.active 
       }>
-        <button alt={this.state.name} className='emoji-background'>
-          <span role="img" row={this.state.name} aria-label={this.state.position}>
-            { this.state.type }
-          </span>
-        </button>
+        <div alt={name} style={{ backgroundImage: `url(${emojiUrl}` }} className='emoji-background'></div>
         { round }
       </div>
     );

@@ -26,7 +26,7 @@ class App extends Component {
     return (
       <div className="main">
         <Main store={store} next={initGame}/>
-        <Loader/>
+        <Loader text="START"/>
       </div>
     );
   }

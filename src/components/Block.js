@@ -29,51 +29,36 @@ const { rotateType } = config;
 
 
 class Block extends Component {
-  constructor(props) {
-    super(props);
-    const { type, name, position, xy } = this.props.block;
-    const rotatePos = rotateType[type];
-  
-    this.state = {
-      type,
-      name,
-      xy,
-      rotate: indexOf(rotatePos, position) * 90,
-      active: position,
-      types: rotatePos,
-    }
-  }
-
   get active() {
     return this.props.block.branches ? 'table-block__active' : ''
   }
 
   rotateBlock = () => {
-    const position = indexOf(this.state.types, this.state.active);
-    const active = position === this.state.types.length - 1 ? this.state.types[0] : this.state.types[position + 1];
+    const { type, name, xy, position } = this.props.block;
+    const pos = indexOf(rotateType[type], position);
+    const active = pos === rotateType[type].length - 1 ? rotateType[type][0] : rotateType[type][pos + 1];
 
-    this.setState({ active, rotate: this.state.rotate + 90 })
-    this.props.rotate({ type: this.state.type, name: this.state.name, xy: this.state.xy }, active);
+    this.props.rotate({ type, name, xy }, active);
   }
 
-  blockStyle(type) {
-    const deg = this.state.rotate;
-
+  blockStyle = () => {
     return {
-      transform: `rotate(${deg}deg)`,
+      transform: `rotate(${this.props.block.rotate}deg)`,
     };
   }
 
   render() {
+    const { type, name, position, padActive } = this.props.block;
+
     return (
-      <div key={this.state.name} className={ this.active + ' table-block' + (this.props.block.padActive ? ' pad-active' : '') }>
+      <div key={name} className={ this.active + ' table-block' + (padActive ? ' pad-active' : '') }>
         <div
-          alt={this.state.name}
+          alt={name}
           onClick={this.rotateBlock}
-          className={ 'active-' + this.state.active + ' block-type' }
-          style={this.blockStyle(this.state.type)}
+          className={ 'active-' + position + ' block-type' }
+          style={this.blockStyle()}
         >
-          { svgBlock[`type${this.state.type}`] }
+          { svgBlock[`type${type}`] }
         </div>
       </div>
     );

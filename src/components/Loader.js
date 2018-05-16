@@ -15,7 +15,7 @@ class Loader extends Component {
 
   render() {
     return (
-      <div onClick={this.startGame} className={"loader " + (this.state.active ? 'loader-active' : '') }>START</div>
+      <div onClick={this.startGame} className={"loader " + (this.state.active ? 'loader-active' : '') }>{ this.props.text }</div>
     );
   }
 }

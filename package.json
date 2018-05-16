@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "emoji-unicode": "^1.0.9",
     "gamepad": "^1.5.2",
     "lodash": "^4.17.10",
     "react": "^16.3.2",

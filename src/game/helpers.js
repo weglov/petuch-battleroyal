@@ -1,8 +1,16 @@
 import { times, constant, flatten, forEach, toNumber, findIndex } from 'lodash';
+import emojiUnicode from 'emoji-unicode';
 import config from '../config';
 
 
-const { width, connections } = config;
+const { width, connections, emojiCdn } = config;
+
+
+export const getEmojiLink = (e) => {
+  const emoji = emojiUnicode(e);
+
+  return emojiCdn + emoji + '.png';
+};
 
 const checkConnections = (v, child, type) => {
   const sync = v.position.charAt(connections[type][0]) === '1' && child.position.charAt(connections[type][1]) === '1';
@@ -21,7 +29,9 @@ const getNeighbors = (k) => {
 
 export const rotateBlock = (game, block, position) => {
   const { xy, name } = block;
-  game.sets[xy.y][xy.x].position = position;
+  const findBlock = game.sets[xy.y][xy.x];
+  findBlock.position = position;
+  findBlock.rotate = findBlock.rotate + 90;
 
   const flattenGame = flatten(game.sets);
   const k = findIndex(flattenGame, { name });

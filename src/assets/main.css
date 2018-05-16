@@ -1,5 +1,5 @@
 #root {
-  background: #39464F;
+  background: #0d1e25;
 }
 
 .main {
@@ -28,6 +28,11 @@
   font-size: 1.5rem;
   padding: .5rem;
   color: #fff;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
 }
 
 .app-header-round {
@@ -41,6 +46,16 @@
   color: #fff;
   font-size: 2rem;
   margin-top: -2.5rem;
+}
+
+.app-header-score, .app-header-game {
+  padding: 0 .3rem;
+  width: 20%;
+  display: block;
+}
+
+.app-header-game {
+  text-align: right
 }
 
 .app-footer {
@@ -87,11 +102,11 @@
 
 .table-block {
   position: relative;
-  width: calc(85vw/4);
-  height: calc(85vw/4);
-  border-radius: 5px;
+  width: calc(80vw/4);
+  height: calc(80vw/4);
+  border-radius: 10px;
   overflow: hidden;
-  margin: 1px;
+  margin: 1.5px;
   background: rgba(69, 82, 91, 0.5);
 }
 
@@ -108,7 +123,7 @@
 }
 
 .table-block__active svg path {
-  stroke: #86E941;
+  stroke: #70ca49;
 }
 
 .table-block.pad-active {
@@ -134,13 +149,16 @@
   border: none;
   transition-delay: 200ms;
   font-size: 2.5rem;
-  background: #3B94B2;
+  background-color: #3B94B2;
   position: relative;
   z-index: 2;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 55%;
 }
 
 .table-block_parent.table-block__active .emoji-background {
-  background: #86E941;
+  background-color: #70ca49;
 }
 .table-block_parent.table-block__active svg {
   opacity: 1;
@@ -167,7 +185,6 @@
   width: 100vw;
   height: 100vh;
   background: #F35B97;
-  transition: all 1s linear;
   z-index: 22;
   text-align: center;
   line-height: 100vh;
@@ -178,6 +195,7 @@
 
 .loader.loader-active {
   transform: translateY(100%);
+  transition: all 1s linear;
 }
 
 @media only screen and (min-width: 768px) {
@@ -186,4 +204,32 @@
     width: 70px;
     height: 70px;
   }
+}
+
+.loader-position--right {
+  transform: translate(100%, 0px);
+  visibility: hidden;
+}
+
+.loader-position--right.loader-active {
+  visibility: visible;
+  transform: translateX(-100%);
+  transition: all 1.5s linear;
+}
+
+.app-footer {
+  display: block;
+  height: 7rem;
+  width: 7rem;
+  line-height: 5.5rem;
+  text-align: center;
+  border-radius: 50%;
+  background: #70ca49;
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: -3.5rem;
+}
+
+.app-footer:hover {
+  background: #458e25;
 }
