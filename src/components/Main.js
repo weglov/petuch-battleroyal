@@ -1,27 +1,19 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { rotateBlock } from '../store/actions';
+import Gamepad from 'react-gamepad';
 import Block from './Block';
 import Node from './Node';
 import Row from './Row';
 
+Gamepad.layouts.XBOX.buttons.push('RS')
 
-class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      matrix: this.props.game.matrix,
-      sets: this.props.game.sets,
-      paths: this.props.game.paths,
-    }
-  }
-  
-  rotate = (block, position) => {
-    const update = this.props.game.rotate(block, position);
-    this.setState({ paths: update.paths });
-  }
+class Main extends Component {  
+  get matrix() {
+    const { sets, rotateBlock } = this.props;
 
-  matrix() {
-    return this.state.sets.map((row, i) => {
+    return sets.map((row, i) => {
       return <Row key={i} number={i}>{
         row.map((v, y) => {
           if (v.node) {
@@ -31,7 +23,7 @@ class Main extends Component {
             />
           } else {
             return <Block 
-              rotate={this.rotate}
+              rotate={rotateBlock}
               key={v.name}
               block={v}
             />
@@ -42,23 +34,45 @@ class Main extends Component {
   }
 
   nextGame = () => {
-    alert('coming soon')
-    // this.props.next();
+    this.props.next();
+    alert('coming soon');
   };
 
+
   render() {
+    const { counter } = this.props;
+
     return (
-      <div className="app">
-        <div className="app-header">
-          <div className="app-header-round">{ this.state.paths.length }</div>
+      <Gamepad>
+        <div className="app">
+          <div className="app-header">
+            <div className="app-header-round">{ counter }</div>
+          </div>
+          <div className="app-game">
+            <div className="game-table">{ this.matrix }</div>
+          </div>
+          <div className="app-footer" onClick={ this.nextGame }>Next game</div>
         </div>
-        <div className="app-game">
-          <div className="game-table">{ this.matrix() }</div>
-        </div>
-        <div className="app-footer" onClick={ this.nextGame }>Next game</div>
-      </div>
+      </Gamepad>
     );
   }
 }
 
-export default Main;
+const mapStateToProps = state => {
+  const { sets, matrix, paths } = state;
+
+  return {
+    sets,
+    matrix,
+    paths,
+    counter: paths.length,
+  }
+};
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({
+    rotateBlock,
+  }, dispatch);
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

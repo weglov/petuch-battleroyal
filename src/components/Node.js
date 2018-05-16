@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+const round = <svg width='150' height='150' viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'>
+  <g id='round' fill='none' fillRule='evenodd' strokeLinecap='square'>
+      <path d='M74,79.8359214 L74,150' id='Line' stroke='#000' strokeWidth='20'
+      transform='matrix(1 0 0 -1 0 229)' />
+  </g>
+</svg>
 
 
 class Node extends Component {
@@ -23,11 +29,12 @@ class Node extends Component {
       <div key={this.state.name} className={
         "table-node--" + this.state.parent + " table-block table-block_parent " + this.active 
       }>
-        <div alt={this.state.name}>
+        <button alt={this.state.name} className='emoji-background'>
           <span role="img" row={this.state.name} aria-label={this.state.position}>
             { this.state.type }
           </span>
-        </div>
+        </button>
+        { round }
       </div>
     );
   }

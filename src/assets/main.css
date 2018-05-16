@@ -66,7 +66,7 @@
   height: 100%;
   width: 100%;
   background-size: cover;
-  transition: all 300ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  transition: all 200ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
   padding: 0;
   margin: 0;
   position: absolute;
@@ -104,11 +104,15 @@
   stroke-width: 45;
   stroke: #2FE7F1;
   transition: all .1s;
-  transition-delay: 300ms;
+  transition-delay: 200ms;
 }
 
 .table-block__active svg path {
   stroke: #86E941;
+}
+
+.table-block.pad-active {
+  box-shadow: 0px 0px 20px #fff;
 }
 
 .table-block_parent {
@@ -116,15 +120,45 @@
   text-align: center;
   font-size: 2.6rem;
   vertical-align: bottom;
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.25) 0%,rgba(0,0,0,0) 60%);;
+  transition: all 1s;
+  background: none;
 }
 
-.table-node--top div, .table-node--bottom div {
-  margin: 10px auto 0;
+.table-block_parent .emoji-background {
+  width: 80%;
+  height: 80%;
+  margin: 10%;
+  box-sizing: border-box;
+  border-radius: 50%;
+  transition: all .1s;
+  border: none;
+  transition-delay: 200ms;
+  font-size: 2.5rem;
+  background: #2FE7F1;
+  position: relative;
+  z-index: 2;
 }
 
-.table-block_parent.table-block__active {
-  background: radial-gradient(ellipse at center, rgba(134, 233, 65, 0.4) 0%,rgba(0,0,0,0) 60%);
+.table-block_parent.table-block__active .emoji-background {
+  background: #86E941;
+}
+.table-block_parent.table-block__active svg {
+  opacity: 1;
+}
+
+.table-block_parent svg {
+  opacity: 0;
+  transition: all .1s;
+  transition-delay: 200ms;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.table-node--bottom svg {
+  transform: rotate(180deg);
 }
 
 .loader {

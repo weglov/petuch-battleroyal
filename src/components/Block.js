@@ -66,7 +66,7 @@ class Block extends Component {
 
   render() {
     return (
-      <div key={this.state.name} className={ this.active + ' table-block' }>
+      <div key={this.state.name} className={ this.active + ' table-block' + (this.props.block.padActive ? ' pad-active' : '') }>
         <div
           alt={this.state.name}
           onClick={this.rotateBlock}
