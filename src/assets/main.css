@@ -187,7 +187,6 @@
   background: #F35B97;
   z-index: 22;
   text-align: center;
-  line-height: 100vh;
   color: #fff;
   font-weight: bold;
   font-size: 5rem;
@@ -206,6 +205,20 @@
   }
 }
 
+.loader-content {
+  position: relative;
+  float: left;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+}
+
+.loader-description {
+  font-size: 3rem;
+  font-weight: normal;
+  padding: 3rem 0;
+}
+
 .loader-position--right {
   transform: translate(100%, 0px);
   visibility: hidden;
@@ -213,8 +226,35 @@
 
 .loader-position--right.loader-active {
   visibility: visible;
-  transform: translateX(-100%);
-  transition: all 1.5s linear;
+  animation-name: slidein;
+  animation-duration: 3s;
+}
+
+.loader-position--top {
+  transform: translate(0%, -100%);
+  visibility: hidden;
+  line-height: initial;
+}
+
+.loader-start {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: #0d1e25;
+  font-size: 25px;
+  padding: 55px 0;
+  box-sizing: border-box;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+}
+
+.loader-position--top.loader-active {
+  visibility: visible;
+  transform: translate(0%, 0%);
+  transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .app-footer {
@@ -232,4 +272,22 @@
 
 .app-footer:hover {
   background: #458e25;
+}
+
+@keyframes slidein {
+  0% {
+    transform: translate(100%, 0);
+  }
+
+  20% {
+    transform: translate(0%, 0);
+  }
+
+  80% {
+    transform: translate(0%, 0);
+  }
+
+  100% {
+    transform: translate(-100%, 0);
+  }
 }

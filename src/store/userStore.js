@@ -6,7 +6,7 @@ const { maxGames } = config;
 const initialState = {
   gameIndex: 1,
   maxGames,
-  start: false,
+  endGameStatus: false,
   score: 0,
 }
 
@@ -15,9 +15,9 @@ export default function gameStore(state = initialState, action) {
     case 'NEXT_GAME':
       return { ...state, gameIndex: ++state.gameIndex, score: action.data };
     case 'END_GAME':
-      alert(`Все игра законченна ты набрал: ${action.data}`)
-
-      return { ...state };
+      return { ...state, endGameStatus: true };
+    case 'NEW_GAME':
+      return { ...initialState };
     default:
       return state
   }

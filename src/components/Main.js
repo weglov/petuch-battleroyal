@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { delay } from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { rotateBlock, nextGame, endGame } from '../store/actions';
+import { rotateBlock, nextGame, endGame, newGame } from '../store/actions';
 import Gamepad from 'react-gamepad';
 
 import NextGame from './NextGame';
@@ -19,6 +20,7 @@ class Main extends Component {
 
     this.state = {
       next: false,
+      nextText: 'Next',
     }
   }
   get matrix() {
@@ -44,15 +46,24 @@ class Main extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.gameIndex === nextProps.maxGames) {
+      this.setState({ nextText: 'End'});
+    }
+  }
+
   nextGame = () => {
     const { gameIndex, maxGames } = this.props;
+    if (this.state.next) return true;
+
     if (gameIndex < maxGames) {
-      this.props.nextGame(this.props.counter);
-      this.props.next();
       this.setState({ next: true });
-      setTimeout(() => this.setState({ next: false }), 1500);
+      this.props.nextGame(this.props.counter);
+      delay(() => this.props.next(), 1500);
+      delay(() => this.setState({ next: false }), 3000);
     } else {
       this.props.endGame(this.props.counter);
+      this.setState({ nextText: 'Next' });
     }
   };
 
@@ -67,8 +78,9 @@ class Main extends Component {
           <div className="app-game">
             <div className="game-table" >{ this.matrix }</div>
           </div>
-          <Next onClick={this.nextGame} text='Next'/>
+          <Next onClick={this.nextGame} text={this.state.nextText}/>
           <NextGame active={this.state.next} text={`${gameIndex} / ${maxGames}`} position='right'/>
+          <NextGame active={this.props.endGameStatus} description={ 'Your score: ' + this.props.counter } onClick={this.props.newGame} text='GAME OVER' position='top'/>
         </div>
       </Gamepad>
     );
@@ -77,7 +89,7 @@ class Main extends Component {
 
 const mapStateToProps = state => {
   const { sets, matrix, paths } = state.game;
-  const { score, gameIndex, maxGames } = state.user;
+  const { score, gameIndex, maxGames, endGameStatus } = state.user;
 
   return {
     sets,
@@ -87,6 +99,7 @@ const mapStateToProps = state => {
     score,
     maxGames,
     gameIndex,
+    endGameStatus,
   }
 };
 
@@ -95,6 +108,7 @@ const mapDispatchToProps = dispatch =>
     rotateBlock,
     nextGame,
     endGame,
+    newGame,
   }, dispatch);
 
 

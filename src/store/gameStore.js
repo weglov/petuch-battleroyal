@@ -1,6 +1,7 @@
 import { rotateBlock } from '../game/helpers';
 import { connect } from './reduces';
 import config from '../config';
+import Game from '../game/Graph';
 
 const initialState = {
   sets: [],
@@ -12,8 +13,12 @@ const initialState = {
 
 export default function app(state = initialState, action) {
   switch (action.type) {
+    case 'NEW_GAME':
+      return { ...state, ...newGame(state.width, state.height) };
+
     case 'INIT_GAME':
-      return { ...state, ...action.data };
+      return { ...state, ...newGame(state.width, state.height) };
+
     case 'ROTATE_BLOCK':
       const { block, position } = action;
       const { sets, matrix } = rotateBlock(state, block, position);
@@ -26,4 +31,10 @@ export default function app(state = initialState, action) {
     default:
       return state
   }
+}
+
+function newGame(width, height) {
+  const game = new Game(width, height);
+
+  return game;
 }
