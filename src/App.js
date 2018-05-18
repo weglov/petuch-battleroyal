@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import app, { connectionNodes } from './store';
 import { createStore, applyMiddleware } from 'redux';
 import Main from './components/Main';
-import NextGame from './components/NextGame';
+import Loader from './components/Loader';
 import './assets/main.css';
 
 const store = createStore(app, applyMiddleware(connectionNodes));
@@ -31,7 +31,7 @@ class App extends Component {
     return (
       <div className="main">
         <Main store={store} next={ this.next }/>
-        <NextGame active={this.state.start} text="START" position="start" onClick={this.newGame}/>
+        <Loader active={this.state.start} text="START" position="start" onClick={this.newGame}/>
       </div>
     );
   }

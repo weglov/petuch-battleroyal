@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { rotateBlock, nextGame, endGame, newGame } from '../store/actions';
 import Gamepad from 'react-gamepad';
 
-import NextGame from './NextGame';
+import Loader from './Loader';
 import Counter from './Counter';
 import Block from './Block';
 import Node from './Node';
@@ -74,13 +74,13 @@ class Main extends Component {
     return (
       <Gamepad>
         <div className="app">
-          <Counter counter={counter + paths.length}/>
+          <Counter counter={counter} score={paths.length}/>
           <div className="app-game">
             <div className="game-table" >{ this.matrix }</div>
           </div>
           <Next onClick={this.nextGame} text={this.state.nextText}/>
-          <NextGame active={this.state.next} text={`${gameIndex} / ${maxGames}`} position='right'/>
-          <NextGame active={this.props.endGameStatus} description={ 'Your score: ' + this.props.counter } onClick={this.props.newGame} text='GAME OVER' position='top'/>
+          <Loader active={this.state.next} text={`${gameIndex} / ${maxGames}`} position='right'/>
+          <Loader active={this.props.endGameStatus} description={ 'Your score: ' + this.props.counter } onClick={this.props.newGame} text='GAME OVER' position='top'/>
         </div>
       </Gamepad>
     );
