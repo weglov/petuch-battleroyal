@@ -1,3 +1,4 @@
+import { startsWith } from 'lodash';
 import { combineReducers } from 'redux';
 import { connectNode } from './actions';
 import user from './userStore';
@@ -14,7 +15,7 @@ export default combineReducers({
 export const connectionNodes = store => next => action => {
   let result = next(action);
 
-  if (action.type !== 'CONNECT_NODES') {
+  if (startsWith(action.type, 'G_')) {
     store.dispatch(connectNode());
   }
 

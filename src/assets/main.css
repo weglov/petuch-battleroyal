@@ -19,6 +19,7 @@
   align-items: center;
   min-width: 352px;
   height: 100%;
+  color: #fff;
   z-index: 20;
   position: relative;
 }
