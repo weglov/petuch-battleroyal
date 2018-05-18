@@ -53,28 +53,28 @@ class Main extends Component {
   }
 
   nextGame = () => {
-    const { gameIndex, maxGames } = this.props;
+    const { gameIndex, maxGames, paths } = this.props;
     if (this.state.next) return true;
 
     if (gameIndex < maxGames) {
       this.setState({ next: true });
-      this.props.nextGame(this.props.counter);
+      this.props.nextGame(paths.length);
       delay(() => this.props.next(), 1500);
       delay(() => this.setState({ next: false }), 3000);
     } else {
-      this.props.endGame(this.props.counter);
+      this.props.endGame(paths.length);
       this.setState({ nextText: 'Next' });
     }
   };
 
 
   render() {
-    const { counter, gameIndex, maxGames } = this.props;
+    const { counter, gameIndex, maxGames, paths } = this.props;
 
     return (
       <Gamepad>
         <div className="app">
-          <Counter counter={counter}/>
+          <Counter counter={counter + paths.length}/>
           <div className="app-game">
             <div className="game-table" >{ this.matrix }</div>
           </div>
@@ -95,7 +95,7 @@ const mapStateToProps = state => {
     sets,
     matrix,
     paths,
-    counter: paths.length + score,
+    counter: score,
     score,
     maxGames,
     gameIndex,
