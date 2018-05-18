@@ -8,16 +8,24 @@ const initialState = {
   maxGames,
   endGameStatus: false,
   score: 0,
+  auth: {}
 }
 
 export default function gameStore(state = initialState, action) {
+  console.log(action);
   switch (action.type) {
-    case 'NEXT_GAME':
+    case 'AUTH_USER':
+      return { ...state, auth: action.user };
+
+    case 'G_NEXT_GAME':
       return { ...state, gameIndex: ++state.gameIndex, score: state.score + action.data };
-    case 'END_GAME':
+
+    case 'G_END_GAME':
       return { ...state, endGameStatus: true, score: state.score + action.data  };
-    case 'NEW_GAME':
+
+    case 'G_NEW_GAME':
       return { ...initialState };
+
     default:
       return state
   }

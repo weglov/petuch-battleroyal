@@ -13,13 +13,13 @@ const initialState = {
 
 export default function app(state = initialState, action) {
   switch (action.type) {
-    case 'NEW_GAME':
+    case 'G_NEW_GAME':
       return { ...state, ...newGame(state.width, state.height) };
 
-    case 'INIT_GAME':
+    case 'G_INIT_GAME':
       return { ...state, ...newGame(state.width, state.height) };
 
-    case 'ROTATE_BLOCK':
+    case 'G_ROTATE_BLOCK':
       const { block, position } = action;
       const { sets, matrix } = rotateBlock(state, block, position);
 

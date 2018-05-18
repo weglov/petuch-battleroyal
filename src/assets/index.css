@@ -17,3 +17,7 @@ body, html {
 body > div {
   display: none;
 }
+
+.hide {
+  display: none !important;
+}

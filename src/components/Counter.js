@@ -6,8 +6,10 @@ class Counter extends Component {
     return (
       <div className="app-header">
         <div className="app-header-score"></div>
-        <div className="app-header-round">{ this.props.counter }</div>
-        <div className="app-header-game"></div>
+        <div className="app-header-round">
+          <span className="app-header-round--score">{ this.props.score }</span>
+        </div>
+        <div className="app-header-game">SCORE: { this.props.counter }</div>
       </div>
     );
   }

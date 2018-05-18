@@ -1,40 +1,90 @@
 import React, { Component } from 'react';
+import firebase from 'firebase/app';
+
+import { api } from './utils';
 import app, { connectionNodes } from './store';
 import { createStore, applyMiddleware } from 'redux';
-import Main from './components/Main';
-import NextGame from './components/NextGame';
 import './assets/main.css';
+import './assets/auth.css';
+import ChoizeScreen from './containers/ChoizeScreen';
+import SignIn from './containers/SignIn';
+import Game from './containers/Game';
+
+// Configure Firebase.
+const config = {
+  apiKey: "AIzaSyBrFhldIME9qfXLhyzlfax-1Nyk0w9r2E8",
+  authDomain: "cloudpipeswin.firebaseapp.com",
+  databaseURL: "https://cloudpipeswin.firebaseio.com",
+  projectId: "cloudpipeswin",
+  storageBucket: "cloudpipeswin.appspot.com",
+  messagingSenderId: "23010356644"
+};
+
+firebase.initializeApp(config);
 
 const store = createStore(app, applyMiddleware(connectionNodes));
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    isSignedIn: false,
+    startGame: false,
+  };
 
-    this.state = {
-      start: false,
-    }
+  componentDidMount() {
+    const self = this;
+
+    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
+      (user) => {
+        if (user) {
+          return user.getIdToken().then(function(data) {
+            api('get-code', {
+              headers: { Authorization: `Bearer ${data}` },
+              method: 'GET', 
+            }).then((code) => {
+              store.dispatch({ type: 'AUTH_USER', user });
+              store.dispatch({ type: 'SAVE_TOKEN', data });
+
+              return self.setState({isSignedIn: true });
+            });
+          });
+        }
+
+        return this.setState({ isSignedIn: false, startGame: false });
+      });
   }
 
-  newGame = () => {
-    if (!this.state.start) {
-      store.dispatch({ type: 'NEW_GAME' });
-      store.dispatch({ type: 'INIT_GAME' });
+  startGame = () => {
+    store.dispatch({ type: 'G_NEW_GAME' });
+    store.dispatch({ type: 'G_INIT_GAME' });
 
-      this.setState({ start: true });
-    }
+    this.setState({ startGame: true });
   }
 
-  next = () => store.dispatch({ type: 'INIT_GAME' })
+  componentWillUnmount() {
+    this.unregisterAuthObserver();
+  }
+
+  authApp() {
+    if (!this.state.isSignedIn) {
+      return <SignIn store={store} />;
+    }
+
+    return (
+      <ChoizeScreen store={store} start={this.startGame}>
+        <Game store={store} />;
+      </ChoizeScreen>
+    )
+  }
 
   render() {
     return (
       <div className="main">
-        <Main store={store} next={ this.next }/>
-        <NextGame active={this.state.start} text="START" position="start" onClick={this.newGame}/>
+        <div className="app">
+          { this.authApp() }
+        </div>
       </div>
-    );
+    )
   }
-}
+};
 
 export default App;

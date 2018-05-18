@@ -4,10 +4,12 @@
   "private": true,
   "dependencies": {
     "emoji-unicode": "^1.0.9",
+    "firebase": "^5.0.3",
     "gamepad": "^1.5.2",
     "lodash": "^4.17.10",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-firebaseui": "^3.0.4",
     "react-gamepad": "^1.0.3",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.4",

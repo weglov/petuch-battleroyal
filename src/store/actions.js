@@ -1,5 +1,5 @@
 export function rotateBlock(block, position) {
-  return { type: 'ROTATE_BLOCK', block, position };
+  return { type: 'G_ROTATE_BLOCK', block, position };
 }
 
 export function connectNode(data) {
@@ -7,13 +7,13 @@ export function connectNode(data) {
 }
 
 export function nextGame(data) {
-  return { type: 'NEXT_GAME', data };
+  return { type: 'G_NEXT_GAME', data };
 }
 
 export function endGame(data) {
-  return { type: 'END_GAME', data };
+  return { type: 'G_END_GAME', data };
 }
 
 export function newGame(data) {
-  return { type: 'NEW_GAME', data };
+  return { type: 'G_NEW_GAME', data, };
 }

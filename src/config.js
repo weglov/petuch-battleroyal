@@ -20,6 +20,7 @@ export const config = {
     bottom: ['🐔', '🐣', '🐷', '🐙', '🐓', '🐋', '🦄', '🐘', '🐍', '🐟', '🐶', '🦊', '🐈', '🐖', '🐵', '🦆', '🐮', '🦁'],
   },
   emojiCdn: 'https://amplifr.com/emoji/assets/images/emojis/160/',
+  api: 'https://us-central1-cloudpipeswin.cloudfunctions.net/api/',
 };
 
 export default config;
