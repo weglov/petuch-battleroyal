@@ -28,6 +28,7 @@ class App extends Component {
   state = {
     isSignedIn: false,
     startGame: false,
+    code: null,
   };
 
   componentDidMount() {
@@ -41,15 +42,15 @@ class App extends Component {
               headers: { Authorization: `Bearer ${data}` },
               method: 'GET', 
             }).then((code) => {
-              store.dispatch({ type: 'AUTH_USER', user });
+              store.dispatch({ type: 'AUTH_USER', user, code });
               store.dispatch({ type: 'SAVE_TOKEN', data });
 
-              return self.setState({isSignedIn: true });
+              return self.setState({ isSignedIn: true, code: code.code });
             });
           });
         }
 
-        return this.setState({ isSignedIn: false, startGame: false });
+        return this.setState({ isSignedIn: false, startGame: false, code: null });
       });
   }
 
@@ -70,7 +71,7 @@ class App extends Component {
     }
 
     return (
-      <ChoizeScreen store={store} start={this.startGame}>
+      <ChoizeScreen store={store} start={this.startGame} code={this.state.code }>
         <Game store={store} />;
       </ChoizeScreen>
     )
