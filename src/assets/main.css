@@ -53,6 +53,7 @@
   padding: 0 .3rem;
   width: 30%;
   display: block;
+  font-size: 16px;
 }
 
 .app-header-game {
@@ -103,8 +104,8 @@
 
 .table-block {
   position: relative;
-  width: calc(80vw/4);
-  height: calc(80vw/4);
+  width: 65px;
+  height: 65px;
   border-radius: 10px;
   overflow: hidden;
   margin: 1.5px;
@@ -263,6 +264,7 @@
   height: 7rem;
   width: 7rem;
   line-height: 5.5rem;
+  box-sizing: border-box;
   text-align: center;
   border-radius: 50%;
   background: #70ca49;

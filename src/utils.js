@@ -4,10 +4,13 @@ import config from './config';
 export const api = (url, data) => {
   const defaultOptions = {
     method: 'GET',
-    'Content-Type': 'application/json',
+    headers: { 'Content-Type': 'application/json' },
   }
 
-  const options = Object.assign({}, defaultOptions, data);
+  const heads = Object.assign({}, defaultOptions.headers, data.headers);
+
+  const options = Object.assign({}, defaultOptions, data, { headers: heads });
+  console.log(options);
 
   return fetch(config.api + url, options)
     .then((res) => res.json())

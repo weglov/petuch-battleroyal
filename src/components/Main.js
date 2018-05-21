@@ -50,10 +50,12 @@ class Main extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.gameIndex === nextProps.maxGames) {
       this.setState({ nextText: 'End'});
+    } else {
+      this.setState({ nextText: 'Next'});
     }
   }
 
-  nextGame = async () => {
+  nextGame = () => {
     const { gameIndex, maxGames, paths } = this.props;
 
     if (this.state.next) return true;
@@ -65,19 +67,18 @@ class Main extends Component {
       delay(() => this.setState({ next: false }), 3000);
     } else {
       const score = paths.length + this.props.counter;
+      const body = JSON.stringify({
+        score,
+        atStand: false,      
+      });
 
-      await pushScore({
+      pushScore({
         headers: { Authorization: this.props.token },
         method: 'POST',
-        body: {
-          score,
-          atStand: false,
-          realAtStandParameter: false,        
-        },
+        body,
       });
 
       this.props.endGame(paths.length);
-      this.setState({ nextText: 'Next' });
     }
   };
 
@@ -97,7 +98,7 @@ class Main extends Component {
           <Loader active={this.props.endGameStatus} description={ 'Your score: ' + this.props.counter } onClick={this.props.newGame} text='GAME OVER' position='top'/>
         </div>
       </Gamepad>
-    );
+    )
   }
 }
 
