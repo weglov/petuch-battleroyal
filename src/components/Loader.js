@@ -15,6 +15,7 @@ class Loader extends Component {
         <div className="loader-content">
           { this.props.text }
           { this.description }
+          { this.props.children || null }
         </div>
       </div>
     );

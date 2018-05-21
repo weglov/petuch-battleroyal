@@ -3,6 +3,7 @@ import { delay } from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { rotateBlock, nextGame, endGame, newGame } from '../store/actions';
+import { pushScore } from '../utils';
 import Gamepad from 'react-gamepad';
 
 import Loader from './Loader';
@@ -52,8 +53,9 @@ class Main extends Component {
     }
   }
 
-  nextGame = () => {
+  nextGame = async () => {
     const { gameIndex, maxGames, paths } = this.props;
+
     if (this.state.next) return true;
 
     if (gameIndex < maxGames) {
@@ -62,6 +64,18 @@ class Main extends Component {
       delay(() => this.props.next(), 1500);
       delay(() => this.setState({ next: false }), 3000);
     } else {
+      const score = paths.length + this.props.counter;
+
+      await pushScore({
+        headers: { Authorization: this.props.token },
+        method: 'POST',
+        body: {
+          score,
+          atStand: false,
+          realAtStandParameter: false,        
+        },
+      });
+
       this.props.endGame(paths.length);
       this.setState({ nextText: 'Next' });
     }
@@ -89,10 +103,11 @@ class Main extends Component {
 
 const mapStateToProps = state => {
   const { sets, matrix, paths } = state.game;
-  const { score, gameIndex, maxGames, endGameStatus } = state.user;
+  const { score, gameIndex, maxGames, endGameStatus, token } = state.user;
 
   return {
     sets,
+    token,
     matrix,
     paths,
     counter: score,

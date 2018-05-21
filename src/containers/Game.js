@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import app, { connectionNodes } from '../store';
-import { createStore, applyMiddleware } from 'redux';
 import Main from '../components/Main';
-import Loader from '../components/Loader';
 
 class App extends Component {
   next = () => this.props.store.dispatch({ type: 'G_INIT_GAME' })
