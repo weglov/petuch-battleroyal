@@ -1,6 +1,6 @@
 import { startsWith } from 'lodash';
 import { combineReducers } from 'redux';
-import { connectNode } from './actions';
+import { connectNode, rotateBlock } from './actions';
 import user from './userStore';
 import game from './gameStore';
 

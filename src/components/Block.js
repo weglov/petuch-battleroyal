@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { indexOf } from 'lodash';
 import config from '../config';
 
 const svgBlock = {
@@ -35,10 +34,7 @@ class Block extends Component {
 
   rotateBlock = () => {
     const { type, name, xy, position } = this.props.block;
-    const pos = indexOf(rotateType[type], position);
-    const active = pos === rotateType[type].length - 1 ? rotateType[type][0] : rotateType[type][pos + 1];
-
-    this.props.rotate({ type, name, xy }, active);
+    this.props.rotate({ type, name, xy }, position);
   }
 
   blockStyle = () => {
@@ -48,10 +44,10 @@ class Block extends Component {
   }
 
   render() {
-    const { type, name, position, padActive } = this.props.block;
+    const { type, name, position, gamepadActive } = this.props.block;
 
     return (
-      <div key={name} className={ this.active + ' table-block' + (padActive ? ' pad-active' : '') }>
+      <div key={name} className={ this.active + ' table-block' + (gamepadActive ? ' pad-active' : '') }>
         <div
           alt={name}
           onClick={this.rotateBlock}

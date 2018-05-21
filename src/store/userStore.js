@@ -11,9 +11,11 @@ const initialState = {
   token: '',
   auth: {},
   code: null,
+  xpad: false
 }
 
 export default function gameStore(state = initialState, action) {
+  console.log(action);
   switch (action.type) {
     case 'AUTH_USER':
       return { ...state, auth: action.user, code: action.code };
@@ -32,7 +34,10 @@ export default function gameStore(state = initialState, action) {
       return { ...state, endGameStatus: true, score };
 
     case 'G_NEW_GAME':
-      return { ...initialState, token: state.token, auth: state.auth };
+      return { ...state, gameIndex: 1, endGameStatus: false, score: 0 };
+
+    case 'XPAD_CONNECT':
+      return { ...state, xpad: true };
 
     default:
       return state

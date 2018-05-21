@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
+import Gamepad from 'react-gamepad';
+import xpad from './store/gamepad';
+import { bindActionCreators } from 'redux';
+import { includes } from 'lodash';
 
 import { api } from './utils';
 import app, { connectionNodes } from './store';
@@ -8,6 +12,7 @@ import { createStore, applyMiddleware } from 'redux';
 import './assets/main.css';
 import './assets/auth.css';
 import './assets/loader.css';
+import './assets/media.css';
 
 import ChoizeScreen from './containers/ChoizeScreen';
 import SignIn from './containers/SignIn';
@@ -27,6 +32,7 @@ const config = {
 firebase.initializeApp(config);
 
 const store = createStore(app, applyMiddleware(connectionNodes));
+Gamepad.layouts.XBOX.buttons.push('RS');
 
 class App extends Component {
   state = {
@@ -35,6 +41,8 @@ class App extends Component {
     code: null,
     loader: false,
   };
+
+  xpadCtrl = bindActionCreators(xpad, store.dispatch);
 
   componentDidMount() {
     const self = this;
@@ -72,28 +80,43 @@ class App extends Component {
 
   authApp() {
     if (!this.state.isSignedIn) {
-      return <SignIn store={store} />;
+      return <SignIn store={store} />
     }
 
     return (
       <ChoizeScreen store={store} start={this.startGame} code={this.state.code }>
-        <Game store={store} />;
+        <Game store={store} />
       </ChoizeScreen>
     )
   }
 
+  xpadButtonChange = (e, bool) => {
+    this.xpadCtrl.onButtonChange(e, bool);
+
+    if (includes(['A'], e) && bool) {
+      const { xpad, sets } = store.getState().game;
+      const block = sets[xpad.y + 1][xpad.x];
+      store.dispatch({ type: 'G_ROTATE_BLOCK', block, position: block.position });
+    }
+  }
+
   render() {
     return (
-      <div className="main">
-        <div className="app">
-          { this.authApp() }
-          <Loader active={this.state.loader} position='loader'>
-            <svg className="circular" viewBox="25 25 50 50">
-              <circle className="path" cx="50" cy="50" r="20" fill="none" strokeWidth="5" strokeMiterlimit="10"/>
-            </svg>
-          </Loader>
+      <Gamepad
+        onConnect={this.xpadCtrl.connect}
+        onButtonChange={this.xpadButtonChange}
+        >
+        <div className="main">
+          <div className="app">
+            { this.authApp() }
+            <Loader active={this.state.loader} position='loader'>
+              <svg className="circular" viewBox="25 25 50 50">
+                <circle className="path" cx="50" cy="50" r="20" fill="none" strokeWidth="5" strokeMiterlimit="10"/>
+              </svg>
+            </Loader>
+          </div>
         </div>
-      </div>
+      </Gamepad>
     )
   }
 };
