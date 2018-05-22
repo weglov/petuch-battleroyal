@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { delay } from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { rotateBlock, nextGame, endGame, newGame } from '../store/actions';
-import { pushScore } from '../utils';
+import { rotateBlock, nextGame, endGame, newGame, hideScreen, initGame } from '../store/actions';
 
 import Loader from './Loader';
 import Counter from './Counter';
@@ -59,23 +58,11 @@ class Main extends Component {
     if (this.state.next) return true;
 
     if (gameIndex < maxGames) {
-      this.setState({ next: true });
       this.props.nextGame(paths.length);
-      delay(() => this.props.next(), 1500);
-      delay(() => this.setState({ next: false }), 3000);
+
+      delay(() => this.props.initGame(), 1500);
+      delay(() => this.props.hideScreen(), 3000);
     } else {
-      const score = paths.length + this.props.counter;
-      const body = JSON.stringify({
-        score,
-        atStand: false,      
-      });
-
-      pushScore({
-        headers: { Authorization: this.props.token },
-        method: 'POST',
-        body,
-      });
-
       this.props.endGame(paths.length);
     }
   };
@@ -91,15 +78,15 @@ class Main extends Component {
           <div className="game-table" >{ this.matrix }</div>
         </div>
         <Next onClick={this.nextGame} text={this.state.nextText}/>
-        <Loader active={this.state.next} text={`${gameIndex} / ${maxGames}`} position='right'/>
-        <Loader active={this.props.endGameStatus} description={ 'Your score: ' + this.props.counter } onClick={this.props.newGame} text='GAME OVER' position='top'/>
+        <Loader active={this.props.nextScreen} text={`${gameIndex} / ${maxGames}`} position='right'/>
+        <Loader active={this.props.endScreen} description={ 'Your score: ' + this.props.counter } onClick={this.props.newGame} text='GAME OVER' position='top'/>
       </div>
     )
   }
 }
 
 const mapStateToProps = state => {
-  const { sets, matrix, paths } = state.game;
+  const { sets, matrix, paths, nextScreen, endScreen } = state.game;
   const { score, gameIndex, maxGames, endGameStatus, token } = state.user;
 
   return {
@@ -112,6 +99,8 @@ const mapStateToProps = state => {
     maxGames,
     gameIndex,
     endGameStatus,
+    nextScreen,
+    endScreen,
   }
 };
 
@@ -121,6 +110,8 @@ const mapDispatchToProps = dispatch =>
     nextGame,
     endGame,
     newGame,
+    hideScreen,
+    initGame,
   }, dispatch);
 
 

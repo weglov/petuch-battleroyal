@@ -1,4 +1,4 @@
-import { cloneDeep, includes, indexOf } from 'lodash';
+import { cloneDeep, indexOf } from 'lodash';
 import { rotateBlock } from '../game/helpers';
 import { connect } from './reduces';
 import config from '../config';
@@ -10,6 +10,8 @@ const initialState = {
   paths: [],
   width: config.width,
   height: config.height,
+  nextScreen: false,
+  endScreen: false,
   xpad: {
     x: 0,
     y: 0,
@@ -19,15 +21,24 @@ const initialState = {
 export default function app(state = initialState, action) {
   switch (action.type) {
     case 'G_NEW_GAME':
-      return { ...state, ...newGame(state.width, state.height) };
+      return { ...state, ...newGame(state.width, state.height), nextScreen: false, endScreen: false };
 
+    case 'G_NEXT_GAME':
+      return { ...state, nextScreen: true }
+
+    case 'HIDE_SCREEN':
+      return { ...state, nextScreen: false, endScreen: false }
+    
     case 'G_INIT_GAME':
       return { ...state, ...newGame(state.width, state.height) };
 
+    case 'G_END_GAME':
+      return { ...state, endScreen: true }
+
     case 'G_ROTATE_BLOCK':
       const { rotateType } = config;
-      const { block, position } = action;
-      const type = block.type;
+      const { block } = action;
+      const { type, position } = block;
       const pos = indexOf(rotateType[type], position);
       const active = pos === rotateType[type].length - 1 ? rotateType[type][0] : rotateType[type][pos + 1];  
       const { sets, matrix } = rotateBlock(state, block, active);
@@ -38,7 +49,7 @@ export default function app(state = initialState, action) {
 
       return { ...state, sets: s, paths }
     
-    case 'X_XPAD_BUTTON':
+    case 'X_XPAD_DPAD':
       let xpad = state.xpad;
       const newSets =  cloneDeep(state.sets);
 
@@ -48,14 +59,9 @@ export default function app(state = initialState, action) {
         newSets[xpad.y + 1][xpad.x].gamepadActive = true;
       }
 
-      if (includes(['A'], action.button)) {
-        app(state, { type: 'G_ROTATE_BLOCK', block: newSets[xpad.y + 1][xpad.x] })
-      }
-
       return { ...state, xpad, sets: newSets };
     
     case 'XPAD_CONNECT':
-      console.log(state.dispatch);
       return { ...state };
   
     default:
@@ -68,8 +74,6 @@ function newGame(width, height) {
 }
 
 function navigationXpad(action, x, y, width, height) {
-  console.log(action, x, y, width, height);
-
   switch (action) {
     case 'DPadRight':
       return { x: x < width - 1 ? x + 1 : x, y };

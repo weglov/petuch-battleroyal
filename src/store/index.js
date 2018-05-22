@@ -1,16 +1,14 @@
 import { startsWith } from 'lodash';
 import { combineReducers } from 'redux';
-import { connectNode, rotateBlock } from './actions';
+import { connectNode } from './actions';
 import user from './userStore';
 import game from './gameStore';
-
 
 
 export default combineReducers({
   game,
   user
-})
-
+});
 
 export const connectionNodes = store => next => action => {
   let result = next(action);
@@ -19,5 +17,5 @@ export const connectionNodes = store => next => action => {
     store.dispatch(connectNode());
   }
 
-  return result
+  return result;
 }

@@ -1,5 +1,5 @@
 import config from '../config';
-
+import { pushScore } from '../utils';
 
 const { maxGames } = config;
 
@@ -7,6 +7,7 @@ const initialState = {
   gameIndex: 1,
   maxGames,
   endGameStatus: false,
+  activeScreen: 'login',
   score: 0,
   token: '',
   auth: {},
@@ -15,7 +16,6 @@ const initialState = {
 }
 
 export default function gameStore(state = initialState, action) {
-  console.log(action);
   switch (action.type) {
     case 'AUTH_USER':
       return { ...state, auth: action.user, code: action.code };
@@ -30,7 +30,17 @@ export default function gameStore(state = initialState, action) {
 
     case 'G_END_GAME':
       const score = state.score + action.data;
+      const body = JSON.stringify({
+        score,
+        atStand: false,  
+      });
 
+      pushScore({
+        headers: { Authorization: state.token },
+        method: 'POST',
+        body,
+      });
+  
       return { ...state, endGameStatus: true, score };
 
     case 'G_NEW_GAME':

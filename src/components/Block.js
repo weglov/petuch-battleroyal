@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import config from '../config';
+
 
 const svgBlock = {
   type1: <svg width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
@@ -24,18 +24,13 @@ const svgBlock = {
   </svg>,
 }
 
-const { rotateType } = config;
-
 
 class Block extends Component {
   get active() {
     return this.props.block.branches ? 'table-block__active' : ''
   }
 
-  rotateBlock = () => {
-    const { type, name, xy, position } = this.props.block;
-    this.props.rotate({ type, name, xy }, position);
-  }
+  rotateBlock = () => this.props.rotate(this.props.block);
 
   blockStyle = () => {
     return {

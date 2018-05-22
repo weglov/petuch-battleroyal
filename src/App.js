@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import Gamepad from 'react-gamepad';
-import xpad from './store/gamepad';
-import { bindActionCreators } from 'redux';
-import { includes } from 'lodash';
+import { buttons } from './store/gamepad';
+import { get } from 'lodash';
 
 import { api } from './utils';
 import app, { connectionNodes } from './store';
@@ -41,8 +40,6 @@ class App extends Component {
     code: null,
     loader: false,
   };
-
-  xpadCtrl = bindActionCreators(xpad, store.dispatch);
 
   componentDidMount() {
     const self = this;
@@ -91,19 +88,13 @@ class App extends Component {
   }
 
   xpadButtonChange = (e, bool) => {
-    this.xpadCtrl.onButtonChange(e, bool);
-
-    if (includes(['A'], e) && bool) {
-      const { xpad, sets } = store.getState().game;
-      const block = sets[xpad.y + 1][xpad.x];
-      store.dispatch({ type: 'G_ROTATE_BLOCK', block, position: block.position });
-    }
+    const activeHandler = get(buttons, e, buttons.DEFAULT);
+    activeHandler(store, e, bool);
   }
 
   render() {
     return (
       <Gamepad
-        onConnect={this.xpadCtrl.connect}
         onButtonChange={this.xpadButtonChange}
         >
         <div className="main">
