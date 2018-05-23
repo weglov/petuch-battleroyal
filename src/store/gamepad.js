@@ -22,6 +22,7 @@ export const buttons = {
     }
   },
   'B': (store, e, bool) => {
+    console.log('store', store, e, bool);
     const state = store.getState();
 
     if (bool) {
@@ -43,10 +44,13 @@ function newGameHandler(store) {
 };
 
 function nextGameHandler(store, state) {
+  console.log(state);
+
   const { gameIndex, maxGames, endGameStatus } = state.user;
   const { paths, nextScreen } = state.game;
 
   if (gameIndex < maxGames && !nextScreen) {
+    console.log(store);
     store.dispatch(nextGame(paths.length));
     delay(() => store.dispatch(initGame()), 1500);
     delay(() => store.dispatch(hideScreen()), 3000);

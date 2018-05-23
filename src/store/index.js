@@ -10,6 +10,14 @@ export default combineReducers({
   user
 });
 
+export const SCREENS = {
+  LOGIN: 'login',
+  SIGNIN: 'signIn',
+  GAME: 'game',
+  LOADING: 'loading',
+  CHOIZE: 'choize'
+};
+
 export const connectionNodes = store => next => action => {
   let result = next(action);
 

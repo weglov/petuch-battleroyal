@@ -29,6 +29,8 @@ export const config = {
   },
   emojiCdn: 'https://amplifr.com/emoji/assets/images/emojis/160/',
   api: 'https://us-central1-cloudpipeswin.cloudfunctions.net/api/',
+  secret: process.env.REACT_APP_SECRET_CODE,
+  atStand: process.env.REACT_APP_AT_STAND
 };
 
 export default config;

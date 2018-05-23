@@ -1,7 +1,7 @@
 import config from './config';
 
 
-export const api = (url, data) => {
+export const api = (url, data = { headers: {} }) => {
   const defaultOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
@@ -19,6 +19,12 @@ export const api = (url, data) => {
 
 export const pushScore = async (data) => {
   const result = await api('push-score', data);
+
+  return result;
+}
+
+export const getCustomToken = async (code) => {
+  const result = await api(`login/by/code/${code}`);
 
   return result;
 }

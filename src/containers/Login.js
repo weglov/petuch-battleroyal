@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { times, find, get, findIndex } from 'lodash';
+import { times, find, get } from 'lodash';
 import LoginChar from '../components/LoginChar';
 import '../assets/login.css';
 import Gamepad from 'react-gamepad';
 import config from '../config';
+import { getCustomToken } from '../utils';
+
 Gamepad.layouts.XBOX.buttons.push('RS');
 
 
@@ -31,10 +33,27 @@ class Login extends Component {
   }
   
   auth = () => {
-    const code = this.state.select.map((v) => v.value);
+    let code = this.state.select.map((v) => v.value);
 
     if (code.every((v) => v.length > 1)) {
-      console.log(code);
+      code = code.map(v => 'U+' + v.toUpperCase()).join('');
+      getCustomToken(code)
+        .then(async (r) => {
+          const { store, signIn } = this.props;
+  
+          store.dispatch({ type: 'SAVE_CUSTOM_TOKEN', token: r.token });
+
+          const user = await signIn(r.token);
+          const token = await user.user.getIdToken();
+
+          store.dispatch({ type: 'SAVE_TOKEN', data: token });
+          store.dispatch({ type: 'START_GAME_AT_SCREEN' });
+          store.dispatch({ type: 'G_NEW_GAME' });
+          store.dispatch({ type: 'G_INIT_GAME' });
+        })
+      .catch(() => {
+        console.log('error');
+      });
     }
   }
 
@@ -88,7 +107,6 @@ class Login extends Component {
   
   xpadButtonChange = (e, bool) => {
     const buttonHandler = get(this.xpad, e, this.xpad.DEFAULT);
-    console.log(e);
 
     if (bool) {
       try {
@@ -117,7 +135,7 @@ class Login extends Component {
             /> )
           }
           <div className="xbox-info" onClick={this.auth}>
-            <div className="xbox-icon"><img src="https://png.icons8.com/color/48/000000/xbox-b.png"/></div>
+            <div className="xbox-icon"><img alt="footer" src="https://png.icons8.com/color/48/000000/xbox-b.png"/></div>
             <div className="xbox-description">Дальше</div>
           </div> 
         </div>

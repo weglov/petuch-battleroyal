@@ -1,7 +1,6 @@
 import config from '../config';
 import { pushScore } from '../utils';
 
-
 export const SCREENS = {
   LOGIN: 'login',
   SIGNIN: 'signIn',
@@ -10,7 +9,7 @@ export const SCREENS = {
   CHOIZE: 'choize'
 };
 
-const { maxGames } = config;
+const { maxGames, secret } = config;
 
 const initialState = {
   gameIndex: 1,
@@ -19,9 +18,10 @@ const initialState = {
   screen: SCREENS.LOADING,
   score: 0,
   token: '',
+  customToken: '',
   auth: {},
   code: null,
-  xpad: false
+  xpad: false,
 }
 
 export default function gameStore(state = initialState, action) {
@@ -35,6 +35,17 @@ export default function gameStore(state = initialState, action) {
 
     case 'AUTH_LOGOUT':
       return { ...initialState, screen: SCREENS.SIGNIN };
+    
+    case 'AUTH_LOGIN_SCREEN':
+      return { ...state, screen: SCREENS.LOGIN }
+
+    case 'SAVE_CUSTOM_TOKEN':
+      const customToken = action.token;
+
+      return { ...state, customToken };
+
+    case 'START_GAME_AT_SCREEN':
+      return { ...state, screen: SCREENS.GAME }
 
     case 'SAVE_TOKEN':
       const token = `Bearer ${action.data}`;
@@ -46,10 +57,10 @@ export default function gameStore(state = initialState, action) {
 
     case 'G_END_GAME':
       const score = state.score + action.data;
-      const body = JSON.stringify({
-        score,
-        atStand: false,  
-      });
+      let data = {score, atStand: false };
+      data = Object.assign({}, data, secret ? { [secret]: true } : null);
+  
+      const body = JSON.stringify(data);
 
       pushScore({
         headers: { Authorization: state.token },
@@ -60,7 +71,7 @@ export default function gameStore(state = initialState, action) {
       return { ...state, endGameStatus: true, score };
 
     case 'G_NEW_GAME':
-      return { ...state, gameIndex: 1, endGameStatus: false, score: 0 };
+      return { ...state, gameIndex: 1, endGameStatus: false, score: 0, screen: SCREENS.GAME };
 
     case 'XPAD_CONNECT':
       return { ...state, xpad: true };
