@@ -22,3 +22,7 @@ export const pushScore = async (data) => {
 
   return result;
 }
+
+export const emojiUrl = (str) => {
+  if (str.length > 1) return `${config.emojiCdn}${str.toLowerCase()}.png`
+};

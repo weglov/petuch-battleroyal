@@ -44,6 +44,7 @@ export default function app(state = initialState, action) {
       const { sets, matrix } = rotateBlock(state, block, active);
 
       return { ...state, sets, matrix };
+
     case 'CONNECT_NODES':
       const { s, paths } = connect(state.sets, state.matrix, state.width);
 

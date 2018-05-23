@@ -1,13 +1,22 @@
 import config from '../config';
 import { pushScore } from '../utils';
 
+
+export const SCREENS = {
+  LOGIN: 'login',
+  SIGNIN: 'signIn',
+  GAME: 'game',
+  LOADING: 'loading',
+  CHOIZE: 'choize'
+};
+
 const { maxGames } = config;
 
 const initialState = {
   gameIndex: 1,
   maxGames,
   endGameStatus: false,
-  activeScreen: 'login',
+  screen: SCREENS.LOADING,
   score: 0,
   token: '',
   auth: {},
@@ -16,9 +25,16 @@ const initialState = {
 }
 
 export default function gameStore(state = initialState, action) {
+  console.log(action);
+
   switch (action.type) {
     case 'AUTH_USER':
-      return { ...state, auth: action.user, code: action.code };
+      const screen = SCREENS.CHOIZE;
+  
+      return { ...state, auth: action.user, code: action.code, screen };
+
+    case 'AUTH_LOGOUT':
+      return { ...initialState, screen: SCREENS.SIGNIN };
 
     case 'SAVE_TOKEN':
       const token = `Bearer ${action.data}`;

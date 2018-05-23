@@ -282,3 +282,17 @@
     transform: translate(-100%, 0);
   }
 }
+
+.xbox-info {
+  display: block;
+  position: relative;
+  width: 300px;
+}
+.xbox-icon, .xbox-description {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.xbox-description {
+  margin-left: 10px;
+}

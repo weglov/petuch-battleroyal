@@ -17,6 +17,7 @@ import ChoizeScreen from './containers/ChoizeScreen';
 import SignIn from './containers/SignIn';
 import Game from './containers/Game';
 import Loader from './components/Loader';
+import Login from './containers/Login';
 
 // Configure Firebase.
 const config = {
@@ -35,7 +36,6 @@ Gamepad.layouts.XBOX.buttons.push('RS');
 
 class App extends Component {
   state = {
-    isSignedIn: false,
     startGame: false,
     code: null,
     loader: false,
@@ -55,12 +55,12 @@ class App extends Component {
               store.dispatch({ type: 'AUTH_USER', user, code });
               store.dispatch({ type: 'SAVE_TOKEN', data });
 
-              return self.setState({ isSignedIn: true, code: code.code, loader: true });
+              return self.setState({ code: code.code, loader: true });
             });
           });
         }
 
-        return this.setState({ isSignedIn: false, startGame: false, code: null, loader: true });
+        return store.dispatch({ type: 'AUTH_LOGOUT' });
       });
   }
 
@@ -76,20 +76,27 @@ class App extends Component {
   }
 
   authApp() {
-    if (!this.state.isSignedIn) {
+    const { screen } = store.getState().user;
+    console.log(process.env);
+
+    if (screen === 'choize') {
+      return <Login />
+      // return (
+      //   <ChoizeScreen store={store} start={this.startGame} code={this.state.code }>
+      //     <Game store={store} />
+      //   </ChoizeScreen>
+      // )
+    } else {
       return <SignIn store={store} />
     }
-
-    return (
-      <ChoizeScreen store={store} start={this.startGame} code={this.state.code }>
-        <Game store={store} />
-      </ChoizeScreen>
-    )
   }
 
   xpadButtonChange = (e, bool) => {
-    const activeHandler = get(buttons, e, buttons.DEFAULT);
-    activeHandler(store, e, bool);
+    const { screen } = store.getState().user;
+    if (screen === 'game') {
+      const activeHandler = get(buttons, e, buttons.DEFAULT);
+      activeHandler(store, e, bool);
+    }
   }
 
   render() {

@@ -1,0 +1,73 @@
+.login {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 230px;
+  background: #3B94B2;
+  box-sizing: border-box;
+  padding: 10px 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 60px #000;
+}
+
+.login-title {
+  font-size: 26px;
+  padding: 10px 0 0 0;
+}
+
+.login-char {
+  display: inline-block;
+  width: 100px;
+  height: 600px;
+  margin: 20px 10px;
+  position: relative;
+}
+
+.login-select {
+  width: 100px;
+  display: block;
+  height: 100px;
+  background: #0d1e25;
+  border-radius: 10px;
+  border: 2px solid #000000;
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.login-select.active {
+  border: 2px solid #fff;
+}
+
+.login-alphabet {
+  display: none;
+  background: black;
+  box-shadow: 0px 20px 20px 3px #000;
+  margin: 4px 0 0 12px;
+  top: 100px;
+  position: absolute;
+  z-index: 2;
+}
+.login-alphabet.active {
+  display: block;
+}
+
+.login-options {
+  width: 75px;
+  display: block;
+  height: 75px;
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 2px solid #000;  
+}
+
+.login-options:hover, .login-options.active {
+  border: 2px solid #fff;  
+}
+
+.login .xbox-info {
+  margin: 0 auto;
+}
