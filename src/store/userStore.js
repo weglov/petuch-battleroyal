@@ -60,6 +60,7 @@ export default function gameStore(state = initialState, action) {
       let data = {score, atStand: false };
     
       if (process.env.REACT_APP_SECRET_CODE) {
+        console.log('PRIVET SASHA');
         data = Object.assign({}, data, { [process.env.REACT_APP_SECRET_CODE]: true });
       }
   
