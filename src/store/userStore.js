@@ -9,7 +9,7 @@ export const SCREENS = {
   CHOIZE: 'choize'
 };
 
-const { maxGames, secret } = config;
+const { maxGames } = config;
 
 const initialState = {
   gameIndex: 1,
@@ -58,7 +58,10 @@ export default function gameStore(state = initialState, action) {
     case 'G_END_GAME':
       const score = state.score + action.data;
       let data = {score, atStand: false };
-      data = Object.assign({}, data, secret ? { [secret]: true } : null);
+    
+      if (process.env.REACT_APP_SECRET_CODE) {
+        data = Object.assign({}, data, { [process.env.REACT_APP_SECRET_CODE]: true });
+      }
   
       const body = JSON.stringify(data);
 
