@@ -367,3 +367,30 @@
 .toplist-item .score {
   color: #70ca49;
 }
+
+
+.atstand .app-header-round {
+  top: 50%;
+  position: fixed;
+  left: -30px;
+  right: 0;
+  height: 130px;
+  width: 130px;
+  line-height: 130px;
+  font-size: 4rem;
+}
+
+.atstand .app-footer-next {
+  top: 50%;
+  position: fixed;
+  right: -30px;
+  height: 130px;
+  width: 130px;
+  line-height: 130px;
+  font-size: 2rem;
+  transform: rotate(-90deg);
+}
+
+.atstand .app-header-game {
+  font-size: 2rem;
+}
