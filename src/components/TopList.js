@@ -19,7 +19,7 @@ class TopList extends Component {
 
   render() {
     return <div className="toplist">
-      <h2>Топ-25 лучших игроков:</h2>
+      <h2>Топ-10 лучших игроков:</h2>
       <ol>{ this.users }</ol>
     </div>
   }

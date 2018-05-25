@@ -16,6 +16,7 @@ import Login from './containers/Login';
 import TopList from './components/TopList';
 
 
+const AT_STAND = process.env.REACT_APP_AT_STAND;
 // Configure Firebase.
 const configFirebase = {
   apiKey: "AIzaSyBrFhldIME9qfXLhyzlfax-1Nyk0w9r2E8",
@@ -72,7 +73,7 @@ class Main extends Component {
   }
 
   componentDidMount = () => {
-    if (process.env.REACT_APP_AT_STAND) {
+    if (AT_STAND) {
       this.standLogin();
     } else {
       this.authObserver();
@@ -92,6 +93,11 @@ class Main extends Component {
   
   async logout() {
     await firebase.auth().signOut();
+    if (AT_STAND) {
+      this.store.dispatch({ type: 'AUTH_LOGIN_SCREEN' });
+    } else {
+      this.store.dispatch({ type: 'AUTH_LOGOUT' });
+    }
   }
 
   app() {
@@ -109,16 +115,7 @@ class Main extends Component {
         return <Login store={store} signIn={this.signInWithCustomToken}/>
       
       case SCREENS.GAME:
-        if (process.env.REACT_APP_AT_STAND) {
-          return (
-            <div className="atstand-game">
-              <Game store={store} />
-              <TopList token={token} />
-            </div>
-          )
-        } else {
-          return <Game store={store} />
-        }
+        return <Game store={store} />
 
       default:
         return <SignIn store={store} />
@@ -140,7 +137,7 @@ class Main extends Component {
       <Gamepad
         onButtonChange={this.xpadButtonChange}
         >
-        <div className={ "main screen-" + this.props.screen + (process.env.REACT_APP_AT_STAND ? ' atstand' : '') }>
+        <div className={ "main screen-" + this.props.screen + (AT_STAND ? ' atstand' : '') }>
           <div className="app">
             <Logout logout={this.logout} />
               { this.app() }

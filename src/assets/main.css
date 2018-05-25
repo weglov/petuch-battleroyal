@@ -219,7 +219,7 @@
 }
 
 .loader-position--right {
-  transform: translate(100%, 0px);
+  transform: translate(120%, 0px);
   visibility: hidden;
 }
 
@@ -347,6 +347,14 @@
   display: block;
   padding: 20px;
   text-align: center;
+  margin: 0;
+}
+
+.toplist {
+  position: fixed;
+  right: 20px;
+  top: 40px;
+  background: #000;
 }
 
 .toplist ol span {
