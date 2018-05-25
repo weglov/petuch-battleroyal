@@ -29,8 +29,8 @@ export const getCustomToken = async (code) => {
   return result;
 }
 
-export const getTopScore = async (token) => {
-  const result = await api('top/20', { headers: { Authorization: token } });
+export const getTopScore = async () => {
+  const result = await api('top/20');
 
   return result;
 }

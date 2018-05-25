@@ -43,4 +43,7 @@
     width: 80px;
     height: 80px;
   }
+  .toplist {
+    width: 50vw;
+  }
 }

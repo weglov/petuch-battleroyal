@@ -317,58 +317,53 @@
   opacity: .4;
 }
 
-.screen-signin .logout, .atstand .logout {
+.screen-signIn h2 {
+  padding: 30px;
+  margin: 0;
+  text-align: center;
+}
+
+.screen-signIn .logout, .atstand .logout {
   display: none;
 }
 
-.atstand-game {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-content: stretch;
-  align-items: flex-start;
-}
-
-.atstand-game .main {
+/* toplist  */
+.toplist {
   display: block;
-  width: 70vw;
-  height: 100vh;
-  position: relative;
-}
-.atstand-game .toplist {
-  display: block;
-  width: 30vw;
-  background: #000;
-  height: 100vh;
+  margin: 0 auto;
 }
 
 .toplist h2 {
   display: block;
   padding: 20px;
   text-align: center;
+  color: #fff;
   margin: 0;
 }
 
-.toplist {
-  position: fixed;
-  right: 20px;
-  top: 40px;
-  background: #000;
-}
-
-.toplist ol span {
-  width: 20vw;
-  display: inline-block;
-}
-
 .toplist ol {
-  color: #3B94B2;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: bold;
+  color: #fff;
+  line-height: 1.5;
+  margin: 0 auto;
+  list-style: none;
+  padding: 0 20px;
 }
 
-.toplist ol span.score {
-  width: 40px;
+.toplist-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: space-between;
+  align-items: flex-start;
+}
+
+.toplist-item .name span {
+  padding: 0 10px;
+  color: #3B94B2;
+}
+
+.toplist-item .score {
   color: #70ca49;
 }

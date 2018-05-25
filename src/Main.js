@@ -13,7 +13,6 @@ import Game from './containers/Game';
 import Loader from './components/Loader';
 import Logout from './components/Logout';
 import Login from './containers/Login';
-import TopList from './components/TopList';
 
 
 const AT_STAND = process.env.REACT_APP_AT_STAND;
@@ -101,7 +100,7 @@ class Main extends Component {
   }
 
   app() {
-    const { screen, code, store, token } = this.props;
+    const { screen, code, store } = this.props;
     const SCREENS = this.props.screens;
 
     switch (screen) {
