@@ -109,3 +109,19 @@
 .login.invalid {
   border: 2px solid red;
 }
+
+.signIn .logout {
+  display: none;
+}
+
+/* firebase */
+
+.signIn h2 {
+  padding: 20px;
+  margin: 0;
+  text-align: center;
+}
+
+.firebaseui-list-item {
+  display: block;
+}

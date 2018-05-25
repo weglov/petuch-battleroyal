@@ -11,7 +11,9 @@ import ChoizeScreen from './containers/ChoizeScreen';
 import SignIn from './containers/SignIn';
 import Game from './containers/Game';
 import Loader from './components/Loader';
+import Logout from './components/Logout';
 import Login from './containers/Login';
+import TopList from './components/TopList';
 
 
 // Configure Firebase.
@@ -90,11 +92,10 @@ class Main extends Component {
   
   async logout() {
     await firebase.auth().signOut();
-    this.store.dispatch({ type: 'GAME_LOGOUT' });
   }
 
   app() {
-    const { screen, code, store } = this.props;
+    const { screen, code, store, token } = this.props;
     const SCREENS = this.props.screens;
 
     switch (screen) {
@@ -108,7 +109,16 @@ class Main extends Component {
         return <Login store={store} signIn={this.signInWithCustomToken}/>
       
       case SCREENS.GAME:
-        return <Game store={store} />
+        if (process.env.REACT_APP_AT_STAND) {
+          return (
+            <div className="atstand-game">
+              <Game store={store} />
+              <TopList token={token} />
+            </div>
+          )
+        } else {
+          return <Game store={store} />
+        }
 
       default:
         return <SignIn store={store} />
@@ -130,9 +140,10 @@ class Main extends Component {
       <Gamepad
         onButtonChange={this.xpadButtonChange}
         >
-        <div className="main">
+        <div className={ "main screen-" + this.props.screen + (process.env.REACT_APP_AT_STAND ? ' atstand' : '') }>
           <div className="app">
-            { this.app() }
+            <Logout logout={this.logout} />
+              { this.app() }
             <Loader active={this.state.loader} position='loader'>
               <svg className="circular" viewBox="25 25 50 50">
                 <circle className="path" cx="50" cy="50" r="20" fill="none" strokeWidth="5" strokeMiterlimit="10"/>
@@ -146,11 +157,12 @@ class Main extends Component {
 };
 
 const mapStateToProps = state => {
-  const { screen, code } = state.user;
+  const { screen, code, token } = state.user;
 
   return {
     screen,
-    code
+    code,
+    token,
   }
 };
 

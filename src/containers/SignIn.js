@@ -21,6 +21,7 @@ class SignIn extends Component {
   render() {
     return (
       <div>
+        <h2>Авторизуйтесь чтобы начать играть:</h2>
         <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()}/>
       </div>
     )

@@ -29,6 +29,12 @@ export const getCustomToken = async (code) => {
   return result;
 }
 
+export const getTopScore = async (token) => {
+  const result = await api('top/20', { headers: { Authorization: token } });
+
+  return result;
+}
+
 export const emojiUrl = (str) => {
   if (str.length > 1) return `${config.emojiCdn}${str.toLowerCase()}.png`
 };

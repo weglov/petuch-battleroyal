@@ -304,3 +304,63 @@
 .xbox-description {
   margin-left: 10px;
 }
+
+.logout {
+  background: url('./logout.png') no-repeat center center;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  background-size: 80%;
+  position: fixed;
+  top: 3px;
+  left: 0;
+  opacity: .4;
+}
+
+.screen-signin .logout, .atstand .logout {
+  display: none;
+}
+
+.atstand-game {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: stretch;
+  align-items: flex-start;
+}
+
+.atstand-game .main {
+  display: block;
+  width: 70vw;
+  height: 100vh;
+  position: relative;
+}
+.atstand-game .toplist {
+  display: block;
+  width: 30vw;
+  background: #000;
+  height: 100vh;
+}
+
+.toplist h2 {
+  display: block;
+  padding: 20px;
+  text-align: center;
+}
+
+.toplist ol span {
+  width: 20vw;
+  display: inline-block;
+}
+
+.toplist ol {
+  color: #3B94B2;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.toplist ol span.score {
+  width: 40px;
+  color: #70ca49;
+}
