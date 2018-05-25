@@ -5,7 +5,7 @@ class Counter extends Component {
   render() {
     return (
       <div className="app-header">
-        <div className="app-header-score"></div>
+        <div className="app-header-score">{ this.props.name }</div>
         <div className="app-header-round">
           <span className="app-header-round--score">{ this.props.score }</span>
         </div>

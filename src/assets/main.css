@@ -55,6 +55,10 @@
   font-size: 16px;
 }
 
+.app-header-score {
+  visibility: hidden;
+}
+
 .app-header-game {
   text-align: right
 }
@@ -307,16 +311,16 @@
 }
 
 .logout {
-  background: url('./logout.png') no-repeat center center;
   cursor: pointer;
   height: 30px;
-  width: 30px;
-  background-size: 80%;
+  width: 100px;
   position: fixed;
   top: 3px;
   left: 0;
   opacity: .4;
   z-index: 21;
+  padding-left: 10px;
+  padding-top: 10px;
 }
 
 .navigation {
@@ -407,8 +411,9 @@
   display: none;
 }
 
-.atstand .app-header-game {
+.atstand .app-header-game, .atstand .app-header-score {
   font-size: 2rem;
+  visibility: visible;
 }
 
 .navigation .xbox-info {

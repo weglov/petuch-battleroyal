@@ -70,11 +70,11 @@ class Main extends Component {
 
 
   render() {
-    const { counter, gameIndex, maxGames, paths } = this.props;
+    const { counter, gameIndex, maxGames, paths, displayName } = this.props;
 
     return (
       <div className="app">
-        <Counter counter={counter} score={paths.length}/>
+        <Counter counter={counter} score={paths.length} name={displayName} />
         <div className="app-game">
           <div className="game-table" >{ this.matrix }</div>
         </div>
@@ -105,6 +105,7 @@ class Main extends Component {
 const mapStateToProps = state => {
   const { sets, matrix, paths, nextScreen, endScreen } = state.game;
   const { score, gameIndex, maxGames, endGameStatus, token } = state.user;
+  const { displayName } = state.user.auth;
 
   return {
     sets,
@@ -118,6 +119,7 @@ const mapStateToProps = state => {
     endGameStatus,
     nextScreen,
     endScreen,
+    displayName,
   }
 };
 

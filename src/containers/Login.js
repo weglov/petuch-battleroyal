@@ -59,6 +59,8 @@ class Login extends Component {
           const user = await signIn(r.token);
           const token = await user.user.getIdToken();
 
+          console.log(user);
+          store.dispatch({ type: 'AUTH_USER', user: user.user, code: '' });
           store.dispatch({ type: 'SAVE_TOKEN', data: token });
           store.dispatch({ type: 'START_GAME_AT_SCREEN' });
           store.dispatch({ type: 'G_NEW_GAME' });
