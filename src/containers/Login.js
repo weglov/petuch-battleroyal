@@ -151,8 +151,8 @@ class Login extends Component {
         >
         <div>
           <div className="xbox-info" onClick={this.auth}>
-            <div className="xbox-icon"><img alt="footer" src="https://png.icons8.com/color/48/000000/xbox-b.png"/></div>
-            <div className="xbox-description">Дальше</div>
+            <div className="xbox-icon"><img alt="footer" src="https://png.icons8.com/color/64/000000/xbox-a.png"/></div>
+            <div className="xbox-description">Начать игру</div>
           </div>
           <div className={"login " + (this.state.invalid ? "invalid" : "")}>
             <div className="login-title">Введите Ваш код:</div>
@@ -164,7 +164,8 @@ class Login extends Component {
                 code={v}
               /> )
             }
-          </div> 
+            <div className="login-footer">Нет кода? получи его на cloudpipe.win</div>
+          </div>
         </div>
       </Gamepad>
     )

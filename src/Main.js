@@ -90,12 +90,14 @@ class Main extends Component {
     this.authObserver();
   }
   
-  async logout() {
+  logout = async() => {
+    const store = this.props.store;
+
     await firebase.auth().signOut();
     if (AT_STAND) {
-      this.store.dispatch({ type: 'AUTH_LOGIN_SCREEN' });
+      store.dispatch({ type: 'AUTH_LOGIN_SCREEN' });
     } else {
-      this.store.dispatch({ type: 'AUTH_LOGOUT' });
+      store.dispatch({ type: 'AUTH_LOGOUT' });
     }
   }
 

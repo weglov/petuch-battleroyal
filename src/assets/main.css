@@ -226,7 +226,7 @@
 .loader-position--right.loader-active {
   visibility: visible;
   animation-name: slidein;
-  animation-duration: 3s;
+  animation-duration: 2s;
 }
 
 .loader-position--top {
@@ -267,7 +267,7 @@
   border-radius: 50%;
   background: #70ca49;
   color: #fff;
-  font-size: 2rem;
+  font-size: 1.3rem;
   margin-bottom: -3.5rem;
 }
 
@@ -303,6 +303,7 @@
 
 .xbox-description {
   margin-left: 10px;
+  font-size: 1.5rem;
 }
 
 .logout {
@@ -315,6 +316,11 @@
   top: 3px;
   left: 0;
   opacity: .4;
+  z-index: 21;
+}
+
+.navigation {
+  display: none;
 }
 
 .screen-signIn h2 {
@@ -344,7 +350,7 @@
 .toplist ol {
   font-weight: bold;
   color: #fff;
-  line-height: 1.5;
+  line-height: 2;
   margin: 0 auto;
   list-style: none;
   padding: 0 20px;
@@ -353,14 +359,32 @@
 .toplist-item {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  /* flex-wrap: nowrap;
   justify-content: space-between;
-  align-content: space-between;
+  align-content: space-between; */
   align-items: flex-start;
 }
 
-.toplist-item .name span {
-  padding: 0 10px;
+.toplist-item .img-src {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 21px;
+  margin: 0 10px;
+}
+.toplist-item .at_stand {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: inline-block;
+  background: url('https://png.icons8.com/material/96/ffffff/tv.png') no-repeat center center;
+  background-size: 79%;
+  vertical-align: text-bottom;
+  margin-left: 5px;
+}
+.toplist-item .key {
+  width: 30px;
   color: #3B94B2;
 }
 
@@ -368,29 +392,63 @@
   color: #70ca49;
 }
 
+.toplist-item .name {
+  width: 70%;
+}
 
 .atstand .app-header-round {
-  top: 50%;
-  position: fixed;
-  left: -30px;
-  right: 0;
   height: 130px;
   width: 130px;
-  line-height: 130px;
+  line-height: 150px;
   font-size: 4rem;
 }
 
 .atstand .app-footer-next {
-  top: 50%;
-  position: fixed;
-  right: -30px;
-  height: 130px;
-  width: 130px;
-  line-height: 130px;
-  font-size: 2rem;
-  transform: rotate(-90deg);
+  display: none;
 }
 
 .atstand .app-header-game {
   font-size: 2rem;
+}
+
+.navigation .xbox-info {
+  display: inline-block;
+  position: relative;
+  margin: 0;
+}
+
+.atstand .navigation {
+  display: block;
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: right;
+}
+
+.loader-position--top .loader-content {
+  font-size: 4rem;
+}
+
+.loader-score, .loader-newGame, .loader-topScore {
+  font-size: 2.5rem;
+  font-weight: normal;
+}
+
+.loader-topScore {
+  background: #fff;
+  display: block;
+  padding: 1rem 2.5rem;
+  border-radius: 41px;
+  font-size: 2rem;
+  text-decoration: none;
+  color: #000;
+  margin: 35px 1rem 0;
+}
+
+.loader-newGame {
+  background: #0d1e25;
+  display: block;
+  padding: 1rem 2.5rem;
+  border-radius: 41px;
+  font-size: 2rem;
+  margin: 35px 1rem 0;
 }

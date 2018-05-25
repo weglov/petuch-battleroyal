@@ -3,7 +3,7 @@ import { printAllPaths } from '../game/dfs';
 
 
 export const connect = (sets, matrix, width) => {
-  const paths = printAllPaths(4, matrix);
+  const paths = printAllPaths(width, matrix);
   const s = cloneDeep(sets);
 
   s.map(i => i.map((v) => {

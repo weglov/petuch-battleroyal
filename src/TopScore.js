@@ -27,7 +27,9 @@ class TopScore extends Component {
   get users() {
     return this.state.users.map((v, key) => 
       <li key={key} className="toplist-item">
-        <div className="name"><span>{++key}.</span>{v.name}</div>
+        <div className="key">{++key}.</div>
+        <div className="img-src" style={{ backgroundImage: `url(${v.picture}` }}></div>
+        <div className="name">{v.name}<span className={v.at_stand ? 'at_stand' : ''}></span></div>
         <div className="score">{v.score}</div>
       </li>);
   }
@@ -35,7 +37,7 @@ class TopScore extends Component {
 
   render() {
     return <div className="toplist">
-      <h2>Топ-20 лучших игроков:</h2>
+      <h2>Топ-20:</h2>
       <ol>{ this.users }</ol>
     </div>
   }

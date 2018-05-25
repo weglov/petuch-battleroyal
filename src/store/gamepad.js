@@ -12,7 +12,7 @@ export const buttons = {
   'DPadUp': (store, e, bool) => store.dispatch(onDpadChange(e, bool)),
   'DPadRight': (store, e, bool) => store.dispatch(onDpadChange(e, bool)),
   'DPadDown': (store, e, bool) => store.dispatch(onDpadChange(e, bool)),
-  'A': (store, e, bool) => {
+  'X': (store, e, bool) => {
     const { xpad, sets } = store.getState().game;
     const block = sets[xpad.y + 1][xpad.x];
 
@@ -21,8 +21,7 @@ export const buttons = {
       store.dispatch(onDpadActive(block));
     }
   },
-  'B': (store, e, bool) => {
-    console.log('store', store, e, bool);
+  'A': (store, e, bool) => {
     const state = store.getState();
 
     if (bool) {
