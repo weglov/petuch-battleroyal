@@ -4,7 +4,6 @@ import Gamepad from 'react-gamepad';
 import { buttons } from './store/gamepad';
 import { connect } from 'react-redux';
 import { get, delay } from 'lodash';
-import { config } from './config';
 
 import { api } from './utils';
 
@@ -15,7 +14,6 @@ import Loader from './components/Loader';
 import Login from './containers/Login';
 
 
-const { atStand } = config;
 // Configure Firebase.
 const configFirebase = {
   apiKey: "AIzaSyBrFhldIME9qfXLhyzlfax-1Nyk0w9r2E8",
@@ -35,7 +33,6 @@ class Main extends Component {
   SCREENS = this.props.screens;
 
   state = {
-    startGame: false,
     loader: false,
   };
 
@@ -73,7 +70,7 @@ class Main extends Component {
   }
 
   componentDidMount = () => {
-    if (atStand) {
+    if (process.env.REACT_APP_AT_STAND) {
       this.standLogin();
     } else {
       this.authObserver();
@@ -81,26 +78,24 @@ class Main extends Component {
   }
 
   startGame = () => {
-    this.store.dispatch({ type: 'G_NEW_GAME' });
-    this.store.dispatch({ type: 'G_INIT_GAME' });
-
-    this.setState({ startGame: true, loader: true });
+    delay(() => {
+      this.store.dispatch({ type: 'G_NEW_GAME' });
+      this.store.dispatch({ type: 'G_INIT_GAME' });
+    }, 2000)
   }
 
   componentWillUnmount() {
     this.authObserver();
   }
   
-  logout() {
-    return firebase.auth().signOut().then(() => {
-      window.location.href=window.location.href;
-    });
+  async logout() {
+    await firebase.auth().signOut();
+    this.store.dispatch({ type: 'GAME_LOGOUT' });
   }
 
   app() {
     const { screen, code, store } = this.props;
     const SCREENS = this.props.screens;
-    window.logout = this.logout;
 
     switch (screen) {
       case SCREENS.CHOIZE:
@@ -122,6 +117,7 @@ class Main extends Component {
 
   xpadButtonChange = (e, bool) => {
     const screen = this.props.screen;
+    if (e === 'Back') this.logout();
 
     if (screen === 'game') {
       const activeHandler = get(buttons, e, buttons.DEFAULT);
@@ -150,7 +146,6 @@ class Main extends Component {
 };
 
 const mapStateToProps = state => {
-  // const { sets, matrix, paths, nextScreen, endScreen } = state.game;
   const { screen, code } = state.user;
 
   return {

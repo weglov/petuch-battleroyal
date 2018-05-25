@@ -17,8 +17,9 @@
   },
   "scripts": {
     "start": "react-scripts start build",
-    "build": "react-scripts build",
-    "build:stand": "REACT_APP_AT_STAND=true REACT_APP_SECRET_CODE=realAtStandParameter react-scripts build",
+    "build": "react-scripts build && rm -rf build/static/js/secret*",
+    "start:stand": "REACT_APP_AT_STAND=true react-scripts start build",
+    "build:stand": "REACT_APP_AT_STAND=true react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

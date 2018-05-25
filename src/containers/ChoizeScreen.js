@@ -1,9 +1,6 @@
-import { delay } from 'lodash';
 import React, { Component } from 'react';
-import config from '../config';
+import { emojiUrl } from '../utils';
 
-
-const { emojiCdn } = config;
 
 class ChoizeScreen extends Component {
   constructor(props) {
@@ -11,22 +8,19 @@ class ChoizeScreen extends Component {
 
     this.state = {
       active: false,
-      initGame: false,
     }
   }
 
   startGame = () => {
     this.setState({ active: true });
     this.props.start();
-
-    delay(() => this.setState({ initGame: true }), 2000);
   }
   
   get code() {
     return this.props.code.split('U+')
       .filter(c => c.length)
       .map((c, k) => {
-        const code = `${emojiCdn}${c.toLowerCase()}.png`;
+        const code = emojiUrl(c);
 
         return <span key={k} style={{backgroundImage: `url(${code})`}}></span>
       });
@@ -35,7 +29,7 @@ class ChoizeScreen extends Component {
   render() {
     return (
       <div>
-        <div className={"game-type " + (this.state.initGame ? "hide" : "" )}>
+        <div className="game-type">
           <div className="game-type-name">Ваш код для игры на стенде:</div>
           <div className="game-type-code">{ this.code }</div>
         </div>
@@ -45,8 +39,6 @@ class ChoizeScreen extends Component {
             Играть прямо сейчас!
           </div>
         </div>
-
-        { this.state.initGame ? this.props.children : null }
       </div>
     )
   }

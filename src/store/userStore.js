@@ -57,20 +57,7 @@ export default function gameStore(state = initialState, action) {
 
     case 'G_END_GAME':
       const score = state.score + action.data;
-      let data = {score, atStand: false };
-    
-      if (process.env.REACT_APP_SECRET_CODE) {
-        console.log('PRIVET SASHA');
-        data = Object.assign({}, data, { [process.env.REACT_APP_SECRET_CODE]: true });
-      }
-  
-      const body = JSON.stringify(data);
-
-      pushScore({
-        headers: { Authorization: state.token },
-        method: 'POST',
-        body,
-      });
+      sendResult(score, state.token);
   
       return { ...state, endGameStatus: true, score };
 
@@ -83,4 +70,25 @@ export default function gameStore(state = initialState, action) {
     default:
       return state
   }
+}
+
+async function sendResult(score, token) {
+  let data = {score, atStand: false };
+
+  if (process.env.REACT_APP_AT_STAND) {
+    try {
+      const secret = await import(/* webpackChunkName: "secretAPP" */ '../secret');
+      data = Object.assign({}, data, secret.default);
+    } catch (error) {
+
+    }
+  }
+
+  const body = JSON.stringify(data);
+
+  return pushScore({
+    headers: { Authorization: token },
+    method: 'POST',
+    body,
+  });
 }

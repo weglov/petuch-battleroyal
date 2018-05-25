@@ -14,13 +14,13 @@ class LoginChar extends Component {
   }
 
   render() {
-    const { value, hover } = this.props.code;
+    const { value, hover, valid } = this.props.code;
     const active = this.props.active === this.props.index;
 
     return (
-      <div className="login-char">
-        <div className={"login-select " + (active ? "active": null ) } onClick={ this.showAlphabet } style={{ backgroundImage: `url(${emojiUrl(value)}` }}></div>
-        <div className={"login-alphabet " + (active ? "active": null ) }>
+      <div className={"login-char " + (!valid ? "invalid": '' ) }>
+        <div className={"login-select " + (active ? "active": '' ) } onClick={ this.showAlphabet } style={{ backgroundImage: `url(${emojiUrl(value)}` }}></div>
+        <div className={"login-alphabet " + (active ? "active": '' ) + ' hover-' + hover }>
           { alphabet.map((v,k) => 
             <div key={k} onClick={() => this.selectItem(this.props.code, v)} className={"login-options " + (hover === k ? "active": '') } style={{ backgroundImage: `url(${emojiUrl(v)}` }}></div>
           )}

@@ -12,9 +12,7 @@ const store = createStore(app, applyMiddleware(connectionNodes));
 
 class App extends Component {
   render() {
-    return (
-      <Main store={store} screens={SCREENS}/>
-    )
+    return <Main store={store} screens={SCREENS}/>
   }
 };
 

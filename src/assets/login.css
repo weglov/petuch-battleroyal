@@ -1,6 +1,6 @@
 .login {
   position: absolute;
-  top: 20%;
+  top: 50%;
   left: 50%;
   text-align: center;
   transform: translate(-50%, -50%);
@@ -23,7 +23,11 @@
   width: 100px;
   height: 600px;
   margin: 20px 10px;
+  cursor: pointer;
   position: relative;
+}
+.login-char.invalid .login-select {
+  border: 2px solid red;
 }
 
 .login-select {
@@ -44,21 +48,50 @@
 .login-alphabet {
   display: none;
   background: black;
-  box-shadow: 0px 20px 20px 3px #000;
-  margin: 4px 0 0 12px;
-  top: 100px;
+  box-shadow: 0 0px 60px 3px #268843;
+  top: 0px;
   position: absolute;
   z-index: 2;
+  border-radius: 10px;
 }
+
 .login-alphabet.active {
   display: block;
 }
 
+.login-alphabet.hover-0 {
+  top: 0px;
+}
+
+.login-alphabet.hover-1 {
+  top: -102px;
+}
+
+.login-alphabet.hover-2 {
+  top: -206px;
+}
+
+.login-alphabet.hover-3 {
+  top: -310px;
+}
+.login-alphabet.hover-4 {
+  top: -414px;
+}
+
+.login-alphabet.hover-5 {
+  top: -518px;
+}
+
+.login-alphabet.hover-6 {
+  top: -622px;
+}
+
 .login-options {
-  width: 75px;
+  width: 100px;
   display: block;
-  height: 75px;
+  height: 100px;
   background-size: 70%;
+  border-radius: 5px;
   background-repeat: no-repeat;
   background-position: center center;
   border: 2px solid #000;  
@@ -68,6 +101,11 @@
   border: 2px solid #fff;  
 }
 
-.login .xbox-info {
-  margin: 0 auto;
+.app .xbox-info {
+  margin: 30px auto;
+  text-align: center;
+}
+
+.login.invalid {
+  border: 2px solid red;
 }
