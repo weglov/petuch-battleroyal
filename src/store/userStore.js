@@ -26,8 +26,6 @@ const initialState = {
 }
 
 export default function gameStore(state = initialState, action) {
-  console.log(action);
-
   switch (action.type) {
     case 'AUTH_USER':
       ReactGA.set({ userId: action.user.uid });

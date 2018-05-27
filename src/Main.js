@@ -36,13 +36,14 @@ class Main extends Component {
 
   state = {
     loader: false,
+    logout: false,
   };
 
   authObserver = () => firebase.auth().onAuthStateChanged(
     (user) => {
       const self = this;
 
-      if (user) {
+      if (user && !this.state.logout) {
         return user.getIdToken().then(function(data) {
           api('get-code', {
             headers: { Authorization: `Bearer ${data}` },
@@ -74,7 +75,7 @@ class Main extends Component {
   componentDidMount = () => {
     if (AT_STAND) {
       this.standLogin();
-    } else {
+    } else {;
       this.authObserver();
     }
   }
@@ -97,6 +98,7 @@ class Main extends Component {
     if (AT_STAND) {
       store.dispatch({ type: 'AUTH_LOGIN_SCREEN' });
     } else {
+      this.setState({ logout: true })
       store.dispatch({ type: 'AUTH_LOGOUT' });
     }
   }
