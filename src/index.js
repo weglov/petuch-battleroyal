@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import './assets/index.css';
 import App from './App';
 import TopScore from './TopScore';
-import registerServiceWorker from './registerServiceWorker';
 
 
 ReactDOM.render((
@@ -15,6 +14,5 @@ ReactDOM.render((
     </Switch>
   </BrowserRouter>
 ), document.getElementById('root'));
-registerServiceWorker();
 
 
