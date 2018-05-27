@@ -15,7 +15,7 @@ import { createStore, applyMiddleware } from 'redux';
 const store = createStore(app, applyMiddleware(connectionNodes));
 const { gaTrackingID } = config;
 
-ReactGA.initialize(gaTrackingID, { debug: true });
+ReactGA.initialize(gaTrackingID, { debug: false });
 
 class App extends Component {
   render() {
