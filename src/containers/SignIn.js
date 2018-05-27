@@ -5,7 +5,7 @@ import firebase from 'firebase';
 
 class SignIn extends Component {
   uiConfig = {
-    signInFlow: 'popup',
+    signInFlow: 'redirect',
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       firebase.auth.FacebookAuthProvider.PROVIDER_ID,

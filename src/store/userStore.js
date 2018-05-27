@@ -1,3 +1,4 @@
+import ReactGA from 'react-ga';
 import config from '../config';
 import { pushScore } from '../utils';
 
@@ -29,11 +30,21 @@ export default function gameStore(state = initialState, action) {
 
   switch (action.type) {
     case 'AUTH_USER':
+      ReactGA.set({ userId: action.user.uid });
+      ReactGA.event({
+        category: 'User',
+        action: 'Auth'
+      });
       const screen = SCREENS.CHOIZE;
   
       return { ...state, auth: action.user, code: action.code, screen };
 
     case 'AUTH_LOGOUT':
+      ReactGA.event({
+        category: 'User',
+        action: 'Logout'
+      })
+      ReactGA.set({ userId: undefined});
       return { ...initialState, screen: SCREENS.SIGNIN };
     
     case 'AUTH_LOGIN_SCREEN':
@@ -58,10 +69,17 @@ export default function gameStore(state = initialState, action) {
     case 'G_END_GAME':
       const score = state.score + action.data;
       sendResult(score, state.token);
-  
+      ReactGA.event({
+        category: 'User',
+        action: 'End game'
+      })
       return { ...state, endGameStatus: true, score };
 
     case 'G_NEW_GAME':
+      ReactGA.event({
+        category: 'User',
+        action: 'New game'
+      })
       return { ...state, gameIndex: 1, endGameStatus: false, score: 0, screen: SCREENS.GAME };
 
     case 'XPAD_CONNECT':

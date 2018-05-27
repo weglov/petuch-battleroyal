@@ -92,8 +92,8 @@ class Main extends Component {
   
   logout = async() => {
     const store = this.props.store;
-
     await firebase.auth().signOut();
+
     if (AT_STAND) {
       store.dispatch({ type: 'AUTH_LOGIN_SCREEN' });
     } else {
