@@ -4,6 +4,7 @@ import Gamepad from 'react-gamepad';
 import { buttons } from './store/gamepad';
 import { connect } from 'react-redux';
 import { get, delay } from 'lodash';
+import nanodelay from 'nanodelay';
 
 import { api } from './utils';
 
@@ -49,16 +50,20 @@ class Main extends Component {
             headers: { Authorization: `Bearer ${data}` },
             method: 'GET', 
           }).then((code) => {
-            self.store.dispatch({ type: 'AUTH_USER', user, code: code.code });
-            self.store.dispatch({ type: 'SAVE_TOKEN', data });
+            if (code.code) {
+              self.store.dispatch({ type: 'AUTH_USER', user, code: code.code });
+              self.store.dispatch({ type: 'SAVE_TOKEN', data });
 
-            return self.setState({ loader: true });
+              return self.setState({ loader: true });
+            } else {
+              return nanodelay(2000).then(self.authObserver);
+            }
           });
         });
-      }
+      } 
 
-      self.store.dispatch({ type: 'AUTH_LOGOUT' });
-      return this.setState({ loader: true });
+      // self.store.dispatch({ type: 'AUTH_LOGOUT' });
+      // return this.setState({ loader: true });
     });
 
   standLogin = () => {
