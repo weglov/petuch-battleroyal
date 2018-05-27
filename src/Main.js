@@ -62,8 +62,8 @@ class Main extends Component {
         });
       } 
 
-      // self.store.dispatch({ type: 'AUTH_LOGOUT' });
-      // return this.setState({ loader: true });
+      self.store.dispatch({ type: 'AUTH_LOGOUT' });
+      return this.setState({ loader: true });
     });
 
   standLogin = () => {
