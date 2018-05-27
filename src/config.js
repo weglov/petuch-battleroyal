@@ -1,5 +1,5 @@
 export const config = {
-  width: process.env.REACT_APP_AT_STAND ? 6 : 4,
+  width: process.env.REACT_APP_AT_STAND ? 7 : 4,
   height: 4,
   maxGames: 5,
   crossRatio: .2,
@@ -29,6 +29,7 @@ export const config = {
   },
   emojiCdn: 'https://amplifr.com/emoji/assets/images/emojis/160/',
   api: 'https://us-central1-cloudpipeswin.cloudfunctions.net/api/',
+  gaTrackingID: process.env.REACT_APP_AT_STAND ? 'UA-119322248-3' : 'UA-119322248-2',
 };
 
 export default config;
