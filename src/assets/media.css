@@ -40,8 +40,8 @@
 @media (min-width: 1025px) {
   .table-block {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
   }
   .toplist {
     width: 50vw;

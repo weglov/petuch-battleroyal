@@ -457,3 +457,34 @@
   font-size: 2rem;
   margin: 35px 1rem 0;
 }
+
+.atstand .loader-topScore {
+  display: none;
+}
+
+.loader-content .xbox-icon, .loader-content .loader-newGameLogout {
+  display: none;
+}
+
+.atstand .loader-newGameLogout {
+  display: block;
+  font-size: 2rem;
+  margin: 2rem 0;
+}
+.atstand .loader-content .xbox-icon {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin: 0 20px;
+  vertical-align: top;
+}
+
+.xbox-icon-back {
+  background: url('https://png.icons8.com/ios/96/ffffff/xbox-menu.png') no-repeat center center;
+  background-size: cover;
+}
+
+.xbox-icon-start {
+  background: url('https://png.icons8.com/ios/100/ffffff/xbox-windows.png') no-repeat center center;
+  background-size: cover;
+}

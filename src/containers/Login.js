@@ -93,16 +93,15 @@ class Login extends Component {
 
       this.setActive(active !== 0 ? active - 1 : len);
     },
-    A: () => {
+    X: () => {
       const active = this.state.active;
       const block = this.state.select[active];
 
       this.selectItem(block, config.alphabet[block.hover]);
       this.xpad.DPadRight();
     },
-    B: () => this.auth(),
-    RT: () => this.xpad.A(),
-    X: () => this.xpad.A(),
+    A: () => this.auth(),
+    RT: () => this.xpad.X(),
     Back: () => {
       this.state.select.map((v) => {
         v.value = '';
@@ -118,7 +117,7 @@ class Login extends Component {
     ArrowUp: () => this.xpad.DPadUp(),
     ArrowLeft: () => this.xpad.DPadLeft(),
     ArrowRight: () => this.xpad.DPadRight(),
-    Enter: () => this.xpad.A(),
+    Enter: () => this.xpad.X(),
   }
 
   onConnect = (gamepadIndex) => {
