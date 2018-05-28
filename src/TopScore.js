@@ -14,7 +14,7 @@ class TopScore extends Component {
         this.setState({ users: v })
         this.delayP();
       });
-    }, 5000);
+    }, 10000);
   }
 
   componentDidMount() {
@@ -27,7 +27,7 @@ class TopScore extends Component {
   get users() {
     return this.state.users.map((v, key) => 
       <li key={key} className="toplist-item">
-        <div className="key">{++key}.</div>
+        <div className={ "key " + (key || 'samokat') }>{++key}.</div>
         <div className="img-src" style={{ backgroundImage: `url(${v.picture}` }}></div>
         <div className="name">{v.name}<span className={v.at_stand ? 'at_stand' : ''}></span></div>
         <div className="score">{v.score}</div>
