@@ -95,7 +95,7 @@ class Main extends Component {
         <Loader end="true" active={this.props.endScreen} text='GAME OVER' position='top'>
           <div className="loader-score" onClick={this.props.newGame}>{ 'Ваш счет: ' + this.props.counter }</div>
           <div className="loader-newGame" onClick={this.props.newGame}><div className="xbox-icon xbox-icon-back"></div>Попробовать еще раз</div>
-          <div className="loader-newGameLogout"><div className="xbox-icon xbox-icon-start"></div>Начать игру под другим пользлователем</div>
+          <div className="loader-newGameLogout"><div className="xbox-icon xbox-icon-start"></div>Начать игру под другим пользователем</div>
           <Link to='/top' className="loader-topScore">Посмотреть результаты</Link>
         </Loader>
       </div>
