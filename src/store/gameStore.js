@@ -1,5 +1,5 @@
 import { cloneDeep, indexOf } from 'lodash';
-import { rotateBlock } from '../game/helpers';
+import { rotateBlock, getEmojiLink } from '../game/helpers';
 import { connect } from './reduces';
 import config from '../config';
 import Game from '../game/Graph';
@@ -40,8 +40,12 @@ export default function app(state = initialState, action) {
       const { block } = action;
       const { type, position } = block;
       const pos = indexOf(rotateType[type], position);
-      const active = pos === rotateType[type].length - 1 ? rotateType[type][0] : rotateType[type][pos + 1];  
+      const active = pos === rotateType[type].length - 1 ? rotateType[type][0] : rotateType[type][pos + 1];
       const { sets, matrix } = rotateBlock(state, block, active);
+
+      if (block.type === 3 && block.rotate > 2000) {
+        easterEgg(block, sets)
+      }
 
       return { ...state, sets, matrix };
 
@@ -91,4 +95,18 @@ function navigationXpad(action, x, y, width, height) {
     default:
       return { x, y }
   }
+}
+
+
+function easterEgg(block, sets) {
+  sets[0] = sets[0].map((v) => { 
+    v.emojiUrl = getEmojiLink('💩');
+
+    return v;
+  })
+
+  sets[sets.length - 1] = sets[sets.length - 1].map((v) => { 
+    v.emojiUrl = getEmojiLink('🚽');
+    return v;
+  });
 }
