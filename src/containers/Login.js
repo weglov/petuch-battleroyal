@@ -101,6 +101,7 @@ class Login extends Component {
       this.xpad.DPadRight();
     },
     A: () => this.auth(),
+    B: () => this.auth(),
     RT: () => this.xpad.X(),
     Back: () => {
       this.state.select.map((v) => {
