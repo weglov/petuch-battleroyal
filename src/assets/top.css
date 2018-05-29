@@ -1,0 +1,10 @@
+#root {
+  overflow: visible;
+}
+
+body {
+  background: #0d1e25;
+}
+.toplist {
+  padding: 0 1rem 2rem 1rem;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getTopScore } from './utils';
 import { delay } from 'lodash';
+import './assets/top.css';
 
 
 class TopScore extends Component {
