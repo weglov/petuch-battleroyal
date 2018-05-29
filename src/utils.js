@@ -12,8 +12,7 @@ export const api = (url, data = { headers: {} }) => {
   const options = Object.assign({}, defaultOptions, data, { headers: heads });
 
   return fetch(config.api + url, options)
-    .then((res) => res.json())
-    .catch(error => error);
+    .then((res) => res.json());
 }
 
 

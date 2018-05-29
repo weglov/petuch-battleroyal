@@ -1,6 +1,8 @@
 import ReactGA from 'react-ga';
 import config from '../config';
 import { pushScore } from '../utils';
+import nanodelay from 'nanodelay';
+
 
 export const SCREENS = {
   LOGIN: 'login',
@@ -101,10 +103,14 @@ async function sendResult(score, token) {
   }
 
   const body = JSON.stringify(data);
-
-  return pushScore({
-    headers: { Authorization: token },
-    method: 'POST',
-    body,
-  });
+  try {
+    await pushScore({
+      headers: { Authorization: token },
+      method: 'POST',
+      body,
+    })
+  } catch (error) {
+    await nanodelay(2000);
+    await sendResult(score, token);
+  }
 }

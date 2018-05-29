@@ -49,7 +49,8 @@ class Main extends Component {
           api('get-code', {
             headers: { Authorization: `Bearer ${data}` },
             method: 'GET', 
-          }).then((code) => {
+          })
+          .then((code) => {
             if (code.code) {
               self.store.dispatch({ type: 'AUTH_USER', user, code: code.code });
               self.store.dispatch({ type: 'SAVE_TOKEN', data });
@@ -58,7 +59,8 @@ class Main extends Component {
             } else {
               return nanodelay(2000).then(self.authObserver);
             }
-          });
+          })
+          .catch(() => nanodelay(2000).then(self.authObserver));
         });
       } 
 
