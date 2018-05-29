@@ -154,7 +154,7 @@ and (min-device-width : 375px)
 and (max-device-width : 667px) 
 and (orientation : landscape) {
   .table-block {
-    width: 45px;
-    height: 45px;
+    width: 47px;
+    height: 47px;
   }
 }
