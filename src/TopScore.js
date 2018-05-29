@@ -15,7 +15,7 @@ class TopScore extends Component {
         this.setState({ users: v })
         this.delayP();
       });
-    }, 10000);
+    }, 20000);
   }
 
   componentDidMount() {
@@ -38,6 +38,8 @@ class TopScore extends Component {
 
   render() {
     return <div className="toplist">
+      <div className="toplist-lonley"></div>
+      <h1>Вот и все ребята. Приходите на стенд Ingram Micro Cloud на вручение в 16.50</h1>
       <h2>Топ-20:</h2>
       <ol>{ this.users }</ol>
     </div>

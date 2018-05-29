@@ -8,3 +8,24 @@ body {
 .toplist {
   padding: 0 1rem 2rem 1rem;
 }
+
+.toplist h1 {
+  color: #fff;
+  text-align: center;
+  display: block;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.toplist h2 {
+  font-size: 1rem;
+}
+
+.toplist-lonley {
+  background: url('https://media.giphy.com/media/lTpme2Po0hkqI/giphy.gif') no-repeat center center;
+  width: 100%;
+  height: 6rem;
+  display: inline-block;
+  margin: 22px auto;
+  background-size: contain;
+}
