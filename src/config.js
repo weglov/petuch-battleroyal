@@ -1,5 +1,5 @@
 export const config = {
-  width: process.env.REACT_APP_AT_STAND ? 7 : 4,
+  width: 7,
   height: 4,
   maxGames: 5,
   crossRatio: .2,

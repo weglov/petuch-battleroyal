@@ -1,3 +1,7 @@
+.table-row {
+  justify-content: center;
+}
+
 /* iphone x */
 @media only screen 
     and (device-width : 375px) 
@@ -45,5 +49,108 @@
   }
   .toplist {
     width: 50vw;
+  }
+}
+
+
+@media screen and (orientation:portrait) {
+  .screen-game .main:after {
+    content: "Переверни телефон";
+    background-image: url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9JzIwMCcgd2lkdGg9JzIwMCcgIGZpbGw9IiNmZmZmZmYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMiIgYmFzZVByb2ZpbGU9InRpbnkiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNjQgNjQiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGZpbGw9IiNmZmZmZmYiIGQ9Ik0yMC4xMjEsMTQuNTQ5SDYuMzc2Yy0xLjk5MSwwLTMuNjE4LDEuNjI3LTMuNjE4LDMuNjE4djI4LjIxN2MwLDEuOTg5LDEuNjI3LDMuNjE4LDMuNjE4LDMuNjE4aDEzLjc0NSAgYzEuOTksMCwzLjYxOC0xLjYyOCwzLjYxOC0zLjYxOFYxOC4xNjdDMjMuNzM5LDE2LjE3NiwyMi4xMTEsMTQuNTQ5LDIwLjEyMSwxNC41NDl6IE0yMC44NDQsNDMuMTI3SDUuNjUxVjE5LjI1MmgxNS4xOTNWNDMuMTI3eiAgIE0xNS4wMjEsNDYuNTg1YzAsMC45NzktMC43OTMsMS43NzItMS43NzIsMS43NzJzLTEuNzcyLTAuNzkzLTEuNzcyLTEuNzcyczAuNzkzLTEuNzcyLDEuNzcyLTEuNzcyUzE1LjAyMSw0NS42MDYsMTUuMDIxLDQ2LjU4NXoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNNjAuOTU2LDQ2LjU0M1YzMi43OTljMC0xLjk5MS0xLjYyNy0zLjYxOS0zLjYxOC0zLjYxOUgyOS4xMjJjLTEuOTg5LDAtMy42MTgsMS42MjgtMy42MTgsMy42MTl2MTMuNzQ0ICBjMCwxLjk5MSwxLjYyOCwzLjYxOSwzLjYxOCwzLjYxOWgyOC4yMTZDNTkuMzI5LDUwLjE2Miw2MC45NTYsNDguNTM0LDYwLjk1Niw0Ni41NDN6IE0zMi4zNzgsNDcuMjY3VjMyLjA3NGgyMy44NzZ2MTUuMTkzSDMyLjM3OHogICBNMjguOTE5LDQxLjQ0NGMtMC45NzksMC0xLjc3Mi0wLjc5NC0xLjc3Mi0xLjc3MnMwLjc5My0xLjc3MiwxLjc3Mi0xLjc3MmMwLjk3OSwwLDEuNzczLDAuNzk0LDEuNzczLDEuNzcyICBTMjkuODk4LDQxLjQ0NCwyOC45MTksNDEuNDQ0eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNmZmZmZmYiIGQ9Ik0yNS44NzYsMTYuNDc5YzE1Ljk4MiwwLDE3LjMyNCw0LjEyNiwxNy40MjYsNy4yMzRoLTIuNjg5bDMuNDY0LDMuODZsMy40NjQtMy44NmgtMi4zMTQgIGMtMC4xMDItNC4xNzUtMS45NjgtOS4xNjUtMTkuMzUtOS4xNjUiPjwvcGF0aD48L3N2Zz4=");
+    background-color: #0e1f26;
+    background-position: center center;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 70%;
+    z-index: 200;
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+  }
+}
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px)
+and (-webkit-min-device-pixel-ratio: 1)  { 
+  .screen-game .main:after {
+    display: none;
+  }
+}
+
+@media screen and (orientation:landscape) {
+  .game-type-start {
+    width: 150px;
+    height: 150px;
+    top: 60%;
+    font-size: 1.5rem;
+  }
+
+  .game-type-content {
+    width: 150px;
+  }
+
+  .screen-game .app {
+    display: block;
+  }
+
+  .table-row {
+    justify-content: center;
+  }
+  .app-game {
+    padding: 0;
+  }
+
+  .table-block {
+    width: 57px;
+    height: 57px;
+    margin: 1px;
+  }
+
+  .app-header-round {
+    display: block;
+    height: 50px;
+    width: 50px;
+    line-height: 67px;
+    text-align: center;
+    border-radius: 50%;
+    background: #3B94B2;
+    color: #fff;
+    font-size: 1rem;
+    margin-top: -30px;
+  }
+
+  .app-footer {
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    transform: translateY(-50%) rotate(-90deg);
+  }
+}
+
+/* iphone 5 */
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-height: 568px)
+  and (-webkit-device-pixel-ratio: 2) 
+  and (orientation:landscape) {
+  .table-block {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+/* iphone 6,7 */
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) 
+and (orientation : landscape) {
+  .table-block {
+    width: 50px;
+    height: 50px;
   }
 }
