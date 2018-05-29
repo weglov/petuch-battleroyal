@@ -9,8 +9,7 @@ import TopScore from './TopScore';
 ReactDOM.render((
   <BrowserRouter>
     <Switch>
-      <Route path="/top" component={TopScore}/>
-      <Route path="/" component={App}/>
+      <Route path="/" component={TopScore}/>
     </Switch>
   </BrowserRouter>
 ), document.getElementById('root'));
