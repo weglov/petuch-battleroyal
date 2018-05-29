@@ -108,9 +108,11 @@ async function sendResult(score, token) {
       headers: { Authorization: token },
       method: 'POST',
       body,
-    })
+    });
   } catch (error) {
-    await nanodelay(2000);
-    await sendResult(score, token);
+    if (error === 'TypeError: Failed to fetch') {
+      await nanodelay(2000);
+      await sendResult(score, token);
+    }
   }
 }
