@@ -6,4 +6,5 @@ node_js:
   - 9
 
 script:
+  - npm install
   - npm run build
