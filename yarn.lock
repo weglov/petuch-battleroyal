@@ -2293,7 +2293,7 @@ emoji-regex@^6.1.0:
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-6.5.1.tgz#9baea929b155565c11ea41c6626eaa65cef992c2"
 
-emoji-unicode@^1.0.9:
+emoji-unicode@1.0.9:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/emoji-unicode/-/emoji-unicode-1.0.9.tgz#f05fd13908bc683478f1557e44ca739b8be4a411"
 
@@ -2926,7 +2926,7 @@ find-up@^2.0.0, find-up@^2.1.0:
   dependencies:
     locate-path "^2.0.0"
 
-firebase@^5.0.0, firebase@^5.0.3:
+firebase@5.0.3, firebase@^5.0.0:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/firebase/-/firebase-5.0.3.tgz#b3e9334022cd90567d398b31f49fb67f0489e271"
   dependencies:
@@ -3052,7 +3052,7 @@ functional-red-black-tree@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
 
-gamepad@^1.5.2:
+gamepad@1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/gamepad/-/gamepad-1.5.2.tgz#15d3eee27a47d7e0eb8dfeff98d0c4f6beac8d75"
   dependencies:
@@ -4750,7 +4750,7 @@ nan@^2.0.0, nan@^2.9.2:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
 
-nanodelay@^0.1.3:
+nanodelay@0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/nanodelay/-/nanodelay-0.1.3.tgz#5e83131e4aa3674851ffef63a779fa7c856b9966"
 
@@ -5859,24 +5859,24 @@ react-error-overlay@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-4.0.0.tgz#d198408a85b4070937a98667f500c832f86bd5d4"
 
-react-firebaseui@^3.0.4:
+react-firebaseui@3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-firebaseui/-/react-firebaseui-3.0.4.tgz#faeef2cee1aa681d832ffd9d28fdf69789b2abf2"
   dependencies:
     firebaseui "^3.0.0"
 
-react-ga@^2.5.3:
+react-ga@2.5.3:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-2.5.3.tgz#0f447c73664c069a5fc341f6f431262e3d4c23c4"
   optionalDependencies:
     prop-types "^15.6.0"
     react "^15.6.2 || ^16.0"
 
-react-gamepad@^1.0.3:
+react-gamepad@1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/react-gamepad/-/react-gamepad-1.0.3.tgz#c50606992c34589bd19f8bb09914084f5c92f4a2"
 
-react-redux@^5.0.7:
+react-redux@5.0.7:
   version "5.0.7"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.7.tgz#0dc1076d9afb4670f993ffaef44b8f8c1155a4c8"
   dependencies:
@@ -6051,7 +6051,7 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
-redux@^4.0.0:
+redux@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.0.tgz#aa698a92b729315d22b34a0553d7e6533555cc03"
   dependencies:
