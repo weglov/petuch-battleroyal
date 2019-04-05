@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "emoji-unicode": "1.0.9",
+    "emoji-unicode": "1.0.10",
     "firebase": "5.3.0",
     "lodash": "4.17.11",
     "nanodelay": "0.1.3",
